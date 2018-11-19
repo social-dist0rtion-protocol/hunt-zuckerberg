@@ -6,20 +6,19 @@ const Web3 = require('web3');
 const web3 = new Web3();
 const WalletProvider = require('truffle-wallet-provider');
 const Wallet = require('ethereumjs-wallet');
-const myPrivateKey = g('PRIVATE_KEY', '')
-const node = g('NODE_HOST', 'http://localhost:7545')
+const myPrivateKey = g('PRIVATE_KEY', '');
+const node = g('RPC_ENDPOINT', 'http://localhost:7545');
 
-var ropstenProvider
+var ropstenProvider;
 
 if (myPrivateKey) {
   // read the private key `PRIVATE_KEY` from our ENV variables
-  let privateKey = new Buffer(myPrivateKey, 'hex')
+  let privateKey = new Buffer(myPrivateKey, 'hex');
   // create a wallet using the private key
   let wallet = Wallet.fromPrivateKey(privateKey);
   // and initialize a wallet provider with a full node on infura.
   provider = new WalletProvider(wallet, node);
 }
-
 
 module.exports = {
   networks: {
@@ -32,6 +31,6 @@ module.exports = {
       gas: 4600000,
       gasPrice: web3.utils.toWei('20', 'gwei'),
       network_id: '*',
-    }
-  }
+    },
+  },
 };
