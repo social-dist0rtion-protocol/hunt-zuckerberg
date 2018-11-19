@@ -2,12 +2,14 @@
   "name": "hunt-zuckerberg",
   "version": "0.0.1",
   "description": "Treasure Hunt featuring Mark Zuckerberg",
-  "main": "truffle.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "repository": {
     "type": "git",
@@ -24,8 +26,18 @@
   "homepage": "https://github.com/sirnicolaz/hunt-zuckerberg#readme",
   "dependencies": {
     "dotenv": "^6.1.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.1",
     "scrypt": "^6.0.3",
     "truffle-wallet-provider": "0.0.5",
     "web3": "^1.0.0-beta.34"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
