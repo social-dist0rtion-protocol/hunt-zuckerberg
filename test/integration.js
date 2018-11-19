@@ -70,6 +70,22 @@ describe('Hunt Zuckerberg', function() {
 
       expect(result).to.be.equal(wallet.address);
     });
+
+    it('updates players list', async function() {
+      const huntZuckerberg = await setup();
+      await wallet.send(huntZuckerberg.methods.redeem('1234'));
+      const result = await wallet.call(huntZuckerberg.methods.players(0));
+
+      expect(result).to.equal(wallet.address);
+    });
+
+    it('does not add duplicate players', async function() {
+      const huntZuckerberg = await setup();
+      await wallet.send(huntZuckerberg.methods.redeem('1234'));
+      await wallet.send(huntZuckerberg.methods.redeem('2345'));
+      await expect(wallet.call(huntZuckerberg.methods.players(1))).to.be
+        .rejected;
+    });
   });
 });
 

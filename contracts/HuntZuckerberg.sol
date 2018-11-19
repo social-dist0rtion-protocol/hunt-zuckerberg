@@ -7,7 +7,7 @@ contract HuntZuckerberg is Ownable {
    mapping (uint256 => address) public hashedCodeToPlayer;
    mapping (address => uint16) public playerToCodeCount;
 
-   address[] players;
+   address[] public players;
 
    function reset() public onlyOwner {
       // TODO: hardcode hashes before going live 
@@ -20,6 +20,8 @@ contract HuntZuckerberg is Ownable {
       for(uint j = 0; j < players.length; j++) {
          playerToCodeCount[players[j]] = 0;
       }
+
+      delete players;
    }
 
    constructor() public {
@@ -30,7 +32,7 @@ contract HuntZuckerberg is Ownable {
       uint hashedCode = uint(keccak256(abi.encodePacked(_code)));
       require(hashedCodeToPlayer[hashedCode] == address(1));
 
-      if(hashedCodeToPlayer[hashedCode] == address(0)) {
+      if(playerToCodeCount[msg.sender] == 0) {
          players.push(msg.sender);
       }
 
