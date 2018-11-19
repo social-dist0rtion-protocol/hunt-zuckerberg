@@ -17,7 +17,7 @@ contract HuntZuckerberg {
 
    function redeem(string _code) public {
       uint hashedCode = uint(keccak256(abi.encodePacked(_code)));
-      require(hashedCodeToPlayer[hashedCode] != address(1));
+      require(hashedCodeToPlayer[hashedCode] == address(1));
       require(hashedCodeToPlayer[hashedCode] != address(0));
 
       hashedCodeToPlayer[hashedCode] = msg.sender;
