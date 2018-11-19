@@ -34,22 +34,47 @@ async function setup() {
 }
 
 describe('Hunt Zuckerberg', function() {
+  var huntZuckerbegh;
+
+  beforeEach(async function() {
+    huntZuckerberg = await setup();
+  });
+
+  describe('reset', async function() {
+    it('resets the whole state', async function() {
+      await wallet.call(huntZuckerberg.methods.redeem('1234'));
+      await wallet.send(huntZuckerberg.methods.reset());
+
+      expect(
+        await wallet.call(
+          huntZuckerberg.methods.playerToCodeCount(wallet.address),
+        ),
+      ).to.equal('0');
+      expect(
+        await wallet.call(
+          huntZuckerberg.methods.hashedCodeToPlayer(
+            web3.utils.keccak256('1234'),
+          ),
+        ),
+      ).to.equal('0x0000000000000000000000000000000000000001');
+      await expect(wallet.call(huntZuckerberg.methods.players(0))).to.be
+        .rejected;
+    });
+  });
+
   describe('redeem', async function() {
     it('redeemds right code without exception', async function() {
-      const huntZuckerberg = await setup();
       expect(async function() {
         await wallet.call(huntZuckerberg.methods.redeem('1234'));
       }).to.not.throw();
     });
 
     it('rejects wrong code', async function() {
-      const huntZuckerberg = await setup();
       await expect(wallet.call(huntZuckerberg.methods.redeem('wrong'))).to.be
         .rejected;
     });
 
     it('updates players count', async function() {
-      const huntZuckerberg = await setup();
       await wallet.send(huntZuckerberg.methods.redeem('1234'));
       const result = await wallet.call(
         huntZuckerberg.methods.playerToCodeCount(wallet.address),
@@ -58,7 +83,6 @@ describe('Hunt Zuckerberg', function() {
     });
 
     it('assigns code to player', async function() {
-      const huntZuckerberg = await setup();
       const testCode = '1234';
       await wallet.send(huntZuckerberg.methods.redeem(testCode));
 
@@ -72,7 +96,6 @@ describe('Hunt Zuckerberg', function() {
     });
 
     it('updates players list', async function() {
-      const huntZuckerberg = await setup();
       await wallet.send(huntZuckerberg.methods.redeem('1234'));
       const result = await wallet.call(huntZuckerberg.methods.players(0));
 
@@ -80,9 +103,9 @@ describe('Hunt Zuckerberg', function() {
     });
 
     it('does not add duplicate players', async function() {
-      const huntZuckerberg = await setup();
       await wallet.send(huntZuckerberg.methods.redeem('1234'));
       await wallet.send(huntZuckerberg.methods.redeem('2345'));
+
       await expect(wallet.call(huntZuckerberg.methods.players(1))).to.be
         .rejected;
     });
