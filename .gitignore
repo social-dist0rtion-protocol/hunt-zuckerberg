@@ -1,0 +1,7 @@
+.env
+.python-version
+*.swp
+build/*
+node_modules/*
+package-lock.json
+
