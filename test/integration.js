@@ -29,8 +29,7 @@ async function logSetup() {
 
 async function setup() {
   const huntZuckerberg = await wallet.loadContract('HuntZuckerberg');
-  await wallet.send(huntZuckerberg.methods.resetPlayer(wallet.address));
-  await wallet.send(huntZuckerberg.methods.resetCodes());
+  await wallet.send(huntZuckerberg.methods.reset());
   return huntZuckerberg;
 }
 
