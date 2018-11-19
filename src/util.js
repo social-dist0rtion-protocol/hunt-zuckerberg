@@ -37,4 +37,13 @@ function getWeb3(localProvider) {
   });
 }
 
-export { getWeb3 };
+async function getContract(web3, name) {
+  const metadata = require(`../build/contracts/${name}.json`);
+  const networkId = await web3.eth.net.getId();
+  const contractAbi = metadata.abi;
+  const contractAddress = metadata.networks[networkId].address;
+  const contract = new web3.eth.Contract(contractAbi, contractAddress);
+  return contract;
+}
+
+export { getWeb3, getContract };

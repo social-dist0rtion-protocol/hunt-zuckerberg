@@ -1,11 +1,14 @@
 import React, { Component } from "react";
-import { getWeb3 } from "./util";
+import { getWeb3, getContract } from "./util";
 
 class Redeem extends Component {
-  async componentDidMount() {
+  async handleRedeem() {
     const web3 = await getWeb3();
     const account = (await web3.eth.getAccounts())[0];
-    console.log(account);
+    const contract = await getContract(web3, "HuntZuckerberg");
+    contract.methods
+      .redeem(this.props.match.params.code)
+      .send({ from: account });
   }
 
   render() {
@@ -16,7 +19,7 @@ class Redeem extends Component {
         <header className="App-header">
           <h1>Redeem</h1>
           <h2>{code}</h2>
-          <button>Redeem</button>
+          <button onClick={this.handleRedeem.bind(this)}>Redeem</button>
         </header>
       </div>
     );
