@@ -1,4 +1,9 @@
 require('dotenv').config();
+const expect = require('chai').expect;
+const chaiAsPromised = require('chai-as-promised');
+const chai = require('chai');
+chai.use(chaiAsPromised);
+
 const assert = require('assert');
 const SimpleWallet = require('./utils');
 const web3 = require('web3');
@@ -29,59 +34,44 @@ async function setup() {
   return huntZuckerberg;
 }
 
-async function testRedeemRightCode() {
-  const huntZuckerberg = await setup();
-  try {
-    const result = await wallet.call(huntZuckerberg.methods.redeem('1234'));
-  } catch (err) {
-    assert(false, 'Code rejected although correct');
-    return;
-  }
+describe('Hunt Zuckerberg', function() {
+  describe('redeem', async function() {
+    it('redeemds right code without exception', async function() {
+      const huntZuckerberg = await setup();
+      expect(async function() {
+        await wallet.call(huntZuckerberg.methods.redeem('1234'));
+      }).to.not.throw();
+    });
 
-  assert(true);
-}
+    it('rejects wrong code', async function() {
+      const huntZuckerberg = await setup();
+      await expect(wallet.call(huntZuckerberg.methods.redeem('wrong'))).to.be
+        .rejected;
+    });
 
-async function testRedeemWrongCode() {
-  const huntZuckerberg = await setup();
-  try {
-    const result = await wallet.call(
-      huntZuckerberg.methods.redeem('wrong code'),
-    );
-  } catch (err) {
-    assert(true);
-    return;
-  }
+    it('updates players count', async function() {
+      const huntZuckerberg = await setup();
+      await wallet.send(huntZuckerberg.methods.redeem('1234'));
+      const result = await wallet.call(
+        huntZuckerberg.methods.playerToCodeCount(wallet.address),
+      );
+      expect(result).to.equal('1');
+    });
 
-  assert(false, 'Code accepted although wrong');
-}
+    it('assigns code to player', async function() {
+      const huntZuckerberg = await setup();
+      const testCode = '1234';
+      await wallet.send(huntZuckerberg.methods.redeem(testCode));
 
-async function testPlayerHasCount() {
-  const huntZuckerberg = await setup();
-  await wallet.send(huntZuckerberg.methods.redeem('1234'));
-  const result = await wallet.call(
-    huntZuckerberg.methods.playerToCodeCount(wallet.address),
-  );
+      const result = await wallet.call(
+        huntZuckerberg.methods.hashedCodeToPlayer(
+          web3.utils.keccak256(testCode),
+        ),
+      );
 
-  assert.equal('1', result);
-}
+      expect(result).to.be.equal(wallet.address);
+    });
+  });
+});
 
-async function testCodeBelongsToPlayer() {
-  const huntZuckerberg = await setup();
-  const testCode = '1234';
-  await wallet.send(huntZuckerberg.methods.redeem(testCode));
-  const result = await wallet.call(
-    huntZuckerberg.methods.hashedCodeToPlayer(web3.utils.keccak256(testCode)),
-  );
-
-  assert.equal(wallet.address, result);
-}
-
-async function run() {
-  await testRedeemRightCode();
-  await testRedeemWrongCode();
-  await testPlayerHasCount();
-  await testCodeBelongsToPlayer();
-}
-
-logSetup();
-run();
+//logSetup();
