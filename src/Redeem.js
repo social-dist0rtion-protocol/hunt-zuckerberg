@@ -18,7 +18,7 @@ class Redeem extends Component {
   }
 
   async componentDidMount() {
-    const web3 = await getWeb3();
+    const web3 = await getWeb3Anon();
     const contract = await getContract(web3, "HuntZuckerberg");
     const codeOwner = await contract.methods
       .hashedCodeToPlayer(Web3Utils.keccak256(this.props.match.params.code))

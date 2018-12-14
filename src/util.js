@@ -1,43 +1,59 @@
 import Web3 from "web3";
 
-function resolveWeb3(resolve) {
+function resolveWeb3(resolve, localProvider, authentication) {
   let web3;
 
   if (window.ethereum) {
     web3 = new Web3(window.ethereum);
-    try {
-      window.ethereum.enable().then(resolve(web3));
-    } catch (err) {
-      console.log(err);
+    if (authentication === true) {
+      try {
+        window.ethereum.enable().then(() => resolve(web3));
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      resolve(web3);
     }
   } else if (window.web3) {
-    web3 = new Web3(web3.currentProvider);
+    web3 = new Web3(window.web3.currentProvider);
     resolve(web3);
   } else {
-    console.log(
-      "Non-Ethereum browser detected. You should consider trying MetaMask!"
-    );
+    if (authentication === true) {
+      throw new Error(
+        "Non-Ethereum browser detected. Cannot work in authenticated mode"
+      );
+    }
+    web3 = new Web3(localProvider);
+    console.log(`Non-Ethereum browser detected. Using ${localProvider}.`);
+    resolve(web3);
   }
 }
 
-function getWeb3(localProvider) {
+function _getWeb3(localProvider, authentication) {
   if (localProvider === undefined) {
-    localProvider = "http://localhost:9545";
+    localProvider = "http://localhost:8545";
   }
 
   return new Promise(resolve => {
     // Wait for loading completion to avoid race conditions with web3 injection timing.
     window.addEventListener("load", () => {
-      resolveWeb3(resolve, localProvider);
+      resolveWeb3(resolve, localProvider, authentication);
     });
     // If document has loaded already, try to get Web3 immediately.
     if (document.readyState === "complete") {
-      resolveWeb3(resolve, localProvider);
+      resolveWeb3(resolve, localProvider, authentication);
     }
   });
 }
+export function getWeb3(localProvider) {
+  return _getWeb3(localProvider, true);
+}
 
-async function getContract(web3, name) {
+export function getWeb3Anon(localProvider) {
+  return _getWeb3(localProvider, false);
+}
+
+export async function getContract(web3, name) {
   const metadata = require(`../build/contracts/${name}.json`);
   const networkId = await web3.eth.net.getId();
   const contractAbi = metadata.abi;
@@ -45,5 +61,3 @@ async function getContract(web3, name) {
   const contract = new web3.eth.Contract(contractAbi, contractAddress);
   return contract;
 }
-
-export { getWeb3, getContract };
