@@ -2,7 +2,7 @@ pragma solidity ^0.4.24;
 import 'openzeppelin-solidity/contracts/ownership/Ownable.sol';
 
 contract HuntZuckerberg is Ownable {
-   event CodeRedeemed(uint code, address indexed player);
+   event CodeRedeemed(uint indexed code, address indexed player);
 
    mapping (uint256 => address) public hashedCodeToPlayer;
    mapping (address => uint16) public playerToCodeCount;
@@ -10,7 +10,7 @@ contract HuntZuckerberg is Ownable {
    address[] public players;
 
    function reset() public onlyOwner {
-      // TODO: hardcode hashes before going live 
+      // TODO: hardcode hashes before going live
       string[3] memory codes = ['1234', '2345', '3456'];
       for (uint i = 0; i < codes.length; i++) {
          uint hashedCode = uint(keccak256(abi.encodePacked(codes[i])));
