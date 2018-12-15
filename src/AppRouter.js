@@ -8,23 +8,29 @@ const Index = () => <h2>Home</h2>;
 const AppRouter = () => (
   <Router>
     <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/redeem/">Redeem</Link>
-          </li>
-          <li>
-            <Link to="/about/">About</Link>
-          </li>
-        </ul>
-      </nav>
+      <header>
+        <h1>Hunt Zuckerberg</h1>
+        <h2>35c3 treasure hunt game!</h2>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/redeem/">Redeem</Link>
+            </li>
+            <li>
+              <Link to="/about/">About</Link>
+            </li>
+          </ul>
+        </nav>
+      </header>
 
-      <Route path="/" exact component={Index} />
-      <Route path="/redeem/:code" component={Redeem} />
-      <Route path="/about/" component={About} />
+      <main>
+        <Route path="/" exact component={Index} />
+        <Route path="/redeem/:code" component={Redeem} />
+        <Route path="/about/" component={About} />
+      </main>
     </div>
   </Router>
 );
