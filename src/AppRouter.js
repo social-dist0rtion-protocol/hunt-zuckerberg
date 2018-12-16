@@ -1,7 +1,8 @@
 import React from "react";
 import About from "./About";
 import Redeem from "./Redeem";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import NotFound from "./NotFound";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 const Index = () => <h2>Home</h2>;
 
@@ -17,9 +18,6 @@ const AppRouter = () => (
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/redeem/">Redeem</Link>
-            </li>
-            <li>
               <Link to="/about/">About</Link>
             </li>
           </ul>
@@ -27,9 +25,12 @@ const AppRouter = () => (
       </header>
 
       <main>
-        <Route path="/" exact component={Index} />
-        <Route path="/redeem/:code" component={Redeem} />
-        <Route path="/about/" component={About} />
+        <Switch>
+          <Route path="/" exact component={Index} />
+          <Route path="/redeem/:token" component={Redeem} />
+          <Route path="/about/" component={About} />
+          <Route component={NotFound} />
+        </Switch>
       </main>
     </div>
   </Router>
