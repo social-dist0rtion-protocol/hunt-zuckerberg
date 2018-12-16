@@ -37,4 +37,41 @@ nav ul li {
 /* MAIN */
 main {
   padding: 10px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  main {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+/* ALERTS */
+.alert {
+  border-width: 1px;
+  border-style: solid;
+  padding: 10px 20px;
+}
+
+.alert.warning {
+  border-color: yellow;
+  background-color: yellow;
+}
+
+/* PAGES */
+.Redeem .token {
+  text-align: center;
+  padding: 20px 10px;
+  border: 1px solid #8b9dc3;
+  background-color: #dfe3ee;
+  margin: 20px 0;
+}
+
+.Redeem .token button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
 }
