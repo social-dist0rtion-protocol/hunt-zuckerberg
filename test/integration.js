@@ -64,6 +64,19 @@ describe('Hunt Zuckerberg', function() {
     });
   });
 
+  describe('getActivatedHashedCodes', async function() {
+    it('returns activatedHashedCodes list', async function() {
+      const expectedActivatedHashedCode =
+        '25545973485761316460330510359994482907632646233309271214536774824048483265015';
+      await wallet.send(huntZuckerberg.methods.redeem('1234'));
+      const result = await wallet.call(
+        huntZuckerberg.methods.getActivatedHashedCodes(),
+      );
+
+      expect(result[0]).to.equal(expectedActivatedHashedCode);
+    });
+  });
+
   describe('redeem', async function() {
     it('redeemds right code without exception', async function() {
       expect(async function() {

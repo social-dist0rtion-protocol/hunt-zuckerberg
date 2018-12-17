@@ -30,7 +30,7 @@ contract HuntZuckerberg is Ownable {
       reset();
    }
 
-   function getActivatedHashcodes() public view returns (uint []){
+   function getActivatedHashedCodes() public view returns (uint []){
       return activatedHashedCodes;
    } 
 

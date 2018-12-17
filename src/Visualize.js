@@ -1,3 +1,4 @@
+import Web3Utils from 'web3-utils';
 import React, {Component} from 'react';
 import {getWeb3Anon, getContract} from './util';
 import {IMAGE_CONFIG} from './image_config.js';
@@ -12,7 +13,7 @@ class Visualize extends Component {
     const web3 = await getWeb3Anon();
     const contract = await getContract(web3, 'HuntZuckerberg');
     const activatedCodes = await contract.methods
-      .getActivatedHashcodes()
+      .getActivatedHashedCodes()
       .call();
     this.setState({
       activatedCodes: activatedCodes,
@@ -30,11 +31,13 @@ class Visualize extends Component {
             width: '2480px',
             height: '1656px',
           }}>
-          {activatedCodes.map(function(item) {
-            const {image, left, top, width, height} = IMAGE_CONFIG[item];
+          {activatedCodes.map(function(code) {
+            const hexCode = Web3Utils.toHex(code);
+            console.log(hexCode);
+            const {image, left, top, width, height} = IMAGE_CONFIG[hexCode];
             return (
               <div
-                key={item}
+                key={hexCode}
                 style={{
                   position: 'absolute',
                   left: left,
