@@ -1,24 +1,26 @@
-import Web3Utils from 'web3-utils';
 import React, {Component} from 'react';
-import {getWeb3, getWeb3Anon, getContract} from './util';
+import {getWeb3Anon, getContract} from './util';
 import {IMAGE_CONFIG} from './image_config.js';
 
 class Visualize extends Component {
   constructor(props) {
     super(props);
+    this.state = {activatedCodes: []};
   }
 
-  getActivatedTokens() {
-    return [
-      '0x2ecbd0fcd2f35ec56fb476b63e3db5c82aceccad006fdddb0cef60f35565ae45',
-      '0xd48a856e44917eeb6783382eb1c45e04563ea265bcbfaa2d0a70b1fd5004cc9e',
-    ];
+  async componentDidMount() {
+    const web3 = await getWeb3Anon();
+    const contract = await getContract(web3, 'HuntZuckerberg');
+    const activatedCodes = await contract.methods
+      .getActivatedHashcodes()
+      .call();
+    this.setState({
+      activatedCodes: activatedCodes,
+    });
   }
-
-  async componentDidMount() {}
 
   render() {
-    const nums = [1, 2, 3];
+    const {activatedCodes} = this.state;
     return (
       <div className="App">
         <div
@@ -28,7 +30,7 @@ class Visualize extends Component {
             width: '2480px',
             height: '1656px',
           }}>
-          {this.getActivatedTokens().map(function(item) {
+          {activatedCodes.map(function(item) {
             const {image, left, top, width, height} = IMAGE_CONFIG[item];
             return (
               <div

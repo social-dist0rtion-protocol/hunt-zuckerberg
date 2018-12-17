@@ -30,6 +30,10 @@ contract HuntZuckerberg is Ownable {
       reset();
    }
 
+   function getActivatedHashcodes() public view returns (uint []){
+      return activatedHashedCodes;
+   } 
+
    function redeem(string _code) public {
       uint hashedCode = uint(keccak256(abi.encodePacked(_code)));
       require(hashedCodeToPlayer[hashedCode] == address(1));
