@@ -8,6 +8,7 @@ contract HuntZuckerberg is Ownable {
    mapping (address => uint16) public playerToCodeCount;
 
    address[] public players;
+   uint256[] public activatedHashedCodes;
 
    function reset() public onlyOwner {
       // TODO: hardcode hashes before going live
@@ -22,6 +23,7 @@ contract HuntZuckerberg is Ownable {
       }
 
       delete players;
+      delete activatedHashedCodes;
    }
 
    constructor() public {
@@ -37,6 +39,7 @@ contract HuntZuckerberg is Ownable {
       }
 
       hashedCodeToPlayer[hashedCode] = msg.sender;
+      activatedHashedCodes.push(hashedCode);
       playerToCodeCount[msg.sender]++;
       emit CodeRedeemed(hashedCode, msg.sender);
    }
