@@ -4,6 +4,7 @@ const chaiAsPromised = require('chai-as-promised');
 const chai = require('chai');
 chai.use(chaiAsPromised);
 
+const uuidv4 = require('uuid/v4');
 const assert = require('assert');
 const SimpleWallet = require('./utils');
 const web3 = require('web3');
@@ -27,9 +28,15 @@ async function logSetup() {
   );
 }
 
+const testCodes = ['1234', '2345'];
+const testHashedCodes = [
+  web3.utils.keccak256('1234'),
+  web3.utils.keccak256('2345'),
+];
+
 async function setup() {
   const huntZuckerberg = await wallet.loadContract('HuntZuckerberg');
-  await wallet.send(huntZuckerberg.methods.reset());
+  await wallet.send(huntZuckerberg.methods.reset(testHashedCodes));
   return huntZuckerberg;
 }
 
@@ -41,9 +48,29 @@ describe('Hunt Zuckerberg', function() {
   });
 
   describe('reset', async function() {
+    it('initializes hashed codes', async function() {
+      const initCodes = [
+        Math.floor(Math.random() * 1000),
+        Math.floor(Math.random() * 1000),
+      ];
+      await wallet.send(huntZuckerberg.methods.reset(initCodes));
+
+      expect(
+        await wallet.call(
+          huntZuckerberg.methods.hashedCodeToPlayer(initCodes[0]),
+        ),
+      ).to.equal('0x0000000000000000000000000000000000000001');
+
+      expect(
+        await wallet.call(
+          huntZuckerberg.methods.hashedCodeToPlayer(initCodes[1]),
+        ),
+      ).to.equal('0x0000000000000000000000000000000000000001');
+    });
+
     it('resets the whole state', async function() {
       await wallet.call(huntZuckerberg.methods.redeem('1234'));
-      await wallet.send(huntZuckerberg.methods.reset());
+      await wallet.send(huntZuckerberg.methods.reset(testHashedCodes));
 
       expect(
         await wallet.call(

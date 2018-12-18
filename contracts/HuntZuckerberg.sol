@@ -10,11 +10,9 @@ contract HuntZuckerberg is Ownable {
    address[] public players;
    uint256[] public activatedHashedCodes;
 
-   function reset() public onlyOwner {
-      // TODO: hardcode hashes before going live
-      string[3] memory codes = ['1234', '2345', '3456'];
-      for (uint i = 0; i < codes.length; i++) {
-         uint hashedCode = uint(keccak256(abi.encodePacked(codes[i])));
+   function reset(uint[] hashedCodes) public onlyOwner {
+      for (uint i = 0; i < hashedCodes.length; i++) {
+         uint hashedCode = hashedCodes[i];
          hashedCodeToPlayer[hashedCode] = address(1);
       }
 
@@ -26,8 +24,8 @@ contract HuntZuckerberg is Ownable {
       delete activatedHashedCodes;
    }
 
-   constructor() public {
-      reset();
+   constructor(uint[] hashedCodes) public {
+      reset(hashedCodes);
    }
 
    function getActivatedHashedCodes() public view returns (uint []){
