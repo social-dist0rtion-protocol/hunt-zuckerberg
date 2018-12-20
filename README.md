@@ -1,6 +1,15 @@
 # hunt-zuckerberg
 Decentralized Treasure Hunt
 
+## Setup
+Before starting, you need a Photoshop generated HTML file, containing all the information of the puzzle image slices. Then:
+```
+mv <your photoshop file> setup/slices.html
+cd setup
+make install
+```
+After this, you can run the truffle migration script and the app.
+
 ## Run DApp
 You need a network to deploy the contract for the game. You can use [Ganache][ganache], [Ganache CLI][ganache:cli], a (test) network through [infura][infura], or your own node.
 
