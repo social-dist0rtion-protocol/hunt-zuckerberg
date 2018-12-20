@@ -2,8 +2,8 @@ import React from "react";
 import About from "./About";
 import Redeem from "./Redeem";
 import NotFound from "./NotFound";
-import Visualize from './Visualize';
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import Visualize from "./Visualize";
+import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
 
 const Index = () => <h2>Home</h2>;
 

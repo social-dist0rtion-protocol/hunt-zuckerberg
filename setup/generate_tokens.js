@@ -1,6 +1,6 @@
-const web3 = require('web3');
-const uuidv4 = require('uuid/v4');
-const fs = require('fs');
+const web3 = require("web3");
+const uuidv4 = require("uuid/v4");
+const fs = require("fs");
 
 function generateTokens(count) {
   var tokenMap = {};
@@ -15,7 +15,7 @@ function generateTokens(count) {
 
 const slicesFile = process.argv[2];
 const outFile = process.argv[3];
-const slices = JSON.parse(fs.readFileSync(slicesFile, 'utf8'));
+const slices = JSON.parse(fs.readFileSync(slicesFile, "utf8"));
 
 const tokenMap = generateTokens(slices.length);
 fs.writeFileSync(outFile, JSON.stringify(tokenMap), function(err) {});

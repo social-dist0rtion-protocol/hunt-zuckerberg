@@ -20,7 +20,7 @@ function resolveWeb3(resolve, localProvider, authentication) {
   } else {
     if (authentication === true) {
       throw new Error(
-        "Non-Ethereum browser detected. Cannot work in authenticated mode"
+        "Non-Ethereum browser detected. Cannot work in authenticated mode",
       );
     }
     web3 = new Web3(localProvider);

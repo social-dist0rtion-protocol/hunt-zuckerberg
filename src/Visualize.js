@@ -1,7 +1,7 @@
-import Web3Utils from 'web3-utils';
-import React, {Component} from 'react';
-import {getWeb3Anon, getContract} from './util';
-import {IMAGE_CONFIG} from './image_config.js';
+import Web3Utils from "web3-utils";
+import React, {Component} from "react";
+import {getWeb3Anon, getContract} from "./util";
+import {IMAGE_CONFIG} from "./image_config.js";
 
 class Visualize extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class Visualize extends Component {
 
   async componentDidMount() {
     const web3 = await getWeb3Anon();
-    const contract = await getContract(web3, 'HuntZuckerberg');
+    const contract = await getContract(web3, "HuntZuckerberg");
     const activatedCodes = await contract.methods
       .getActivatedHashedCodes()
       .call();
@@ -26,10 +26,10 @@ class Visualize extends Component {
       <div className="App">
         <div
           style={{
-            position: 'relative',
-            margin: 'auto',
-            width: '2480px',
-            height: '1656px',
+            position: "relative",
+            margin: "auto",
+            width: "2480px",
+            height: "1656px",
           }}>
           {activatedCodes.map(function(code) {
             const hexCode = Web3Utils.toHex(code);
@@ -39,14 +39,14 @@ class Visualize extends Component {
               <div
                 key={hexCode}
                 style={{
-                  position: 'absolute',
+                  position: "absolute",
                   left: left,
                   top: top,
                   width: width,
                   height: height,
                 }}>
                 <img
-                  src={require('./images/puzzle/' + image)}
+                  src={require("./images/puzzle/" + image)}
                   width={width}
                   height={height}
                   alt=""

@@ -1,12 +1,12 @@
-const Web3 = require('web3');
-const Web3Utils = require('web3-utils');
-const Tx = require('ethereumjs-tx');
+const Web3 = require("web3");
+const Web3Utils = require("web3-utils");
+const Tx = require("ethereumjs-tx");
 
 class SimpleWallet {
   constructor(privateKey, publicKey, provider) {
-    if (provider === undefined || typeof provider === 'string') {
+    if (provider === undefined || typeof provider === "string") {
       provider = new Web3.providers.HttpProvider(
-        provider || 'http://localhost:8545',
+        provider || "http://localhost:8545",
       );
     }
     this.web3 = new Web3(provider);
@@ -30,16 +30,16 @@ class SimpleWallet {
       from: this.address,
       to: method._parent.options.address,
       nonce: this.web3.utils.toHex(count),
-      gasPrice: this.web3.utils.toHex(this.web3.utils.toWei('21', 'gwei')),
+      gasPrice: this.web3.utils.toHex(this.web3.utils.toWei("21", "gwei")),
       gasLimit: this.web3.utils.toHex(
         await method.estimateGas({from: this.address}),
       ),
       data: data,
     };
     var tx = new Tx(rawTx);
-    tx.sign(Buffer.from(this.privateKey, 'hex'));
+    tx.sign(Buffer.from(this.privateKey, "hex"));
     await this.web3.eth.sendSignedTransaction(
-      '0x' + tx.serialize().toString('hex'),
+      "0x" + tx.serialize().toString("hex"),
     );
   }
 
