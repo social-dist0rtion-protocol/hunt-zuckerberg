@@ -1,12 +1,12 @@
 import Web3Utils from "web3-utils";
-import React, {Component} from "react";
-import {getWeb3Anon, getContract} from "./util";
-import {IMAGE_CONFIG} from "./image_config.js";
+import React, { Component } from "react";
+import { getWeb3Anon, getContract } from "./util";
+const IMAGE_CONFIG = require("./resources/image_config");
 
 class Visualize extends Component {
   constructor(props) {
     super(props);
-    this.state = {activatedCodes: []};
+    this.state = { activatedCodes: [] };
   }
 
   async componentDidMount() {
@@ -16,12 +16,12 @@ class Visualize extends Component {
       .getActivatedHashedCodes()
       .call();
     this.setState({
-      activatedCodes: activatedCodes,
+      activatedCodes: activatedCodes
     });
   }
 
   render() {
-    const {activatedCodes} = this.state;
+    const { activatedCodes } = this.state;
     return (
       <div className="App">
         <div
@@ -29,12 +29,13 @@ class Visualize extends Component {
             position: "relative",
             margin: "auto",
             width: "2480px",
-            height: "1656px",
-          }}>
+            height: "1656px"
+          }}
+        >
           {activatedCodes.map(function(code) {
             const hexCode = Web3Utils.toHex(code);
             console.log(hexCode);
-            const {image, left, top, width, height} = IMAGE_CONFIG[hexCode];
+            const { image, left, top, width, height } = IMAGE_CONFIG[hexCode];
             return (
               <div
                 key={hexCode}
@@ -43,10 +44,11 @@ class Visualize extends Component {
                   left: left,
                   top: top,
                   width: width,
-                  height: height,
-                }}>
+                  height: height
+                }}
+              >
                 <img
-                  src={require("./images/puzzle/" + image)}
+                  src={"./images/puzzle/" + image}
                   width={width}
                   height={height}
                   alt=""
