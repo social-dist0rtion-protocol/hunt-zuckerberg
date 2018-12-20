@@ -18,4 +18,4 @@ const outFile = process.argv[3];
 const slices = JSON.parse(fs.readFileSync(slicesFile, 'utf8'));
 
 const tokenMap = generateTokens(slices.length);
-fs.writeFile(outFile, JSON.stringify(tokenMap), function(err) {});
+fs.writeFileSync(outFile, JSON.stringify(tokenMap), function(err) {});

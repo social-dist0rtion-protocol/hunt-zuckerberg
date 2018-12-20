@@ -17,7 +17,7 @@ const slices = JSON.parse(fs.readFileSync(slicesFile, 'utf8'));
 const tokens = JSON.parse(fs.readFileSync(tokensFile, 'utf8'));
 
 const imageConfig = generateConfig(tokens, slices);
-fs.writeFile(
+fs.writeFileSync(
   outFile,
   'export const IMAGE_CONFIG = ' + JSON.stringify(imageConfig),
   function(err) {},
