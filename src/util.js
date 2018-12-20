@@ -20,7 +20,7 @@ function resolveWeb3(resolve, localProvider, authentication) {
   } else {
     if (authentication === true) {
       throw new Error(
-        "Non-Ethereum browser detected. Cannot work in authenticated mode"
+        "Non-Ethereum browser detected. Cannot work in authenticated mode",
       );
     }
     web3 = new Web3(localProvider);
@@ -45,12 +45,22 @@ function _getWeb3(localProvider, authentication) {
     }
   });
 }
+
 export function getWeb3(localProvider) {
   return _getWeb3(localProvider, true);
 }
 
 export function getWeb3Anon(localProvider) {
   return _getWeb3(localProvider, false);
+}
+
+export function isWallet() {
+  return !!(window.web3 || window.ethereum);
+}
+
+export async function isConnected(web3) {
+  const networkId = await web3.eth.net.getId();
+  return networkId === 4;
 }
 
 export async function getContract(web3, name) {

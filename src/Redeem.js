@@ -1,6 +1,7 @@
 import Web3Utils from "web3-utils";
 import React, { Component } from "react";
-import { getWeb3, getWeb3Anon, getContract } from "./util";
+import { getWeb3, getWeb3Anon, getContract, isWallet } from "./util";
+import { Link } from "react-router-dom";
 
 class Redeem extends Component {
   constructor(props) {
@@ -31,21 +32,49 @@ class Redeem extends Component {
   }
 
   render() {
-    const code = this.props.match.params.code;
+    const token = this.props.match.params.token;
     const { isCodeAlreadyRedeemed } = this.state;
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1>Redeem</h1>
-          <h2>{code}</h2>
+      <div className="Redeem">
+        <h1>You've found a piece of Mark Zuckerberg!</h1>
+
+        <p>
+          Mark Zuckerberg has been decentralized and spread around the 35c3.
+          Redeem this code and help us rebuilding Mark.
+        </p>
+        <div className="token">
+          <h2>{token}</h2>
           <button
             disabled={isCodeAlreadyRedeemed}
             onClick={this.handleRedeem.bind(this)}
           >
             Redeem
           </button>
-        </header>
+        </div>
+
+        {!isWallet() && (
+          <div className="alert warning">
+            <p>
+              You are not using an Ethereum compatible browser. In order to
+              redeem the token, you need to install{" "}
+              <a
+                href="https://metamask.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                MetaMask
+              </a>{" "}
+              on your browser.
+            </p>
+          </div>
+        )}
+        <h2>What is this?</h2>
+        <p>This game works on the Ethereum Rinkeby blockchain.</p>
+        <p>
+          Read how it works in the <Link to="/about">about page</Link>, and make
+          sure to visit us at the assembly table.
+        </p>
       </div>
     );
   }
