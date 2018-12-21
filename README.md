@@ -20,6 +20,8 @@ You need a network to deploy the contract for the game. You can use [Ganache][ga
 ## Run tests
 `./node_modules/.bin/mocha --reporter spec`
 
+## Experimental
+Try `npm run dev` to compile the game, compile the smart contracts, run ganache, build the app.
 
 [ganache]: https://truffleframework.com/ganache
 [ganache:cli]: https://github.com/trufflesuite/ganache-cli

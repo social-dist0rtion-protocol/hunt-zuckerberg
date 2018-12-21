@@ -15,13 +15,17 @@ class Visualize extends Component {
     const activatedCodes = await contract.methods
       .getActivatedHashedCodes()
       .call();
+    console.log(activatedCodes);
     this.setState({
       activatedCodes: activatedCodes
     });
   }
 
   render() {
-    const { activatedCodes } = this.state;
+    let { activatedCodes } = this.state;
+    if (!activatedCodes) {
+      activatedCodes = [];
+    }
     return (
       <div className="App">
         <div
