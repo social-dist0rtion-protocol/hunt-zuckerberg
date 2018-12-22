@@ -12,7 +12,7 @@ const endpoint = process.env.RPC_ENDPOINT || "http://localhost:8545";
 let provider;
 
 if (privateKey) {
-  let wallet = Wallet.fromPrivateKey(new Buffer(myPrivateKey, "hex"));
+  let wallet = Wallet.fromPrivateKey(new Buffer(privateKey, "hex"));
   provider = new WalletProvider(wallet, endpoint);
 } else if (mnemonic) {
   provider = new HDWalletProvider(mnemonic, endpoint);

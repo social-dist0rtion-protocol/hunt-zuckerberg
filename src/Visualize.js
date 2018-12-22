@@ -34,8 +34,7 @@ class Visualize extends Component {
             margin: "auto",
             width: "2480px",
             height: "1656px"
-          }}
-        >
+          }}>
           {activatedCodes.map(function(code) {
             const hexCode = Web3Utils.toHex(code);
             console.log(hexCode);
@@ -49,10 +48,9 @@ class Visualize extends Component {
                   top: top,
                   width: width,
                   height: height
-                }}
-              >
+                }}>
                 <img
-                  src={"./images/puzzle/" + image}
+                  src={require("./images/puzzle/" + image)}
                   width={width}
                   height={height}
                   alt=""
