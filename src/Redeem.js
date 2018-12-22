@@ -14,26 +14,29 @@ class Redeem extends Component {
     const account = (await web3.eth.getAccounts())[0];
     const contract = await getContract(web3, "HuntZuckerberg");
     contract.methods
-      .redeem(this.props.match.params.code)
+      .redeem(this.props.match.params.token)
       .send({ from: account });
   }
 
   async componentDidMount() {
     const web3 = await getWeb3Anon();
     const contract = await getContract(web3, "HuntZuckerberg");
-    const codeOwner = await contract.methods
-      .hashedCodeToPlayer(Web3Utils.keccak256(this.props.match.params.code))
+    const tokenToPlayer = await contract.methods
+      .hashedCodeToPlayer(Web3Utils.keccak256(this.props.match.params.token))
       .call();
-    console.log(codeOwner);
+    console.log(
+      tokenToPlayer,
+      Web3Utils.keccak256(this.props.match.params.token)
+    );
     this.setState({
-      isCodeAlreadyRedeemed:
-        codeOwner !== "0x0000000000000000000000000000000000000001"
+      isTokenRedeemed:
+        tokenToPlayer !== "0x0000000000000000000000000000000000000001"
     });
   }
 
   render() {
     const token = this.props.match.params.token;
-    const { isCodeAlreadyRedeemed } = this.state;
+    const { isTokenRedeemed } = this.state;
 
     return (
       <div className="Redeem">
@@ -41,12 +44,12 @@ class Redeem extends Component {
 
         <p>
           Mark Zuckerberg has been decentralized and spread around the 35c3.
-          Redeem this code and help us rebuilding Mark.
+          Redeem this token and help us rebuilding Mark.
         </p>
         <div className="token">
           <h2>{token}</h2>
           <button
-            disabled={isCodeAlreadyRedeemed}
+            disabled={isTokenRedeemed}
             onClick={this.handleRedeem.bind(this)}
           >
             Redeem

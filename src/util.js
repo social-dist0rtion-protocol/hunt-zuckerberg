@@ -1,5 +1,9 @@
 import Web3 from "web3";
 
+const CONTRACTS = {
+  HuntZuckerberg: require("./resources/contracts/HuntZuckerberg.json")
+};
+
 function resolveWeb3(resolve, localProvider, authentication) {
   let web3;
 
@@ -20,7 +24,7 @@ function resolveWeb3(resolve, localProvider, authentication) {
   } else {
     if (authentication === true) {
       throw new Error(
-        "Non-Ethereum browser detected. Cannot work in authenticated mode",
+        "Non-Ethereum browser detected. Cannot work in authenticated mode"
       );
     }
     web3 = new Web3(localProvider);
@@ -64,7 +68,7 @@ export async function isConnected(web3) {
 }
 
 export async function getContract(web3, name) {
-  const metadata = require(`../build/contracts/${name}.json`);
+  const metadata = CONTRACTS[name];
   const networkId = await web3.eth.net.getId();
   const contractAbi = metadata.abi;
   const contractAddress = metadata.networks[networkId].address;

@@ -2,22 +2,22 @@
 
 IPFS_DATA_DIR=$(HOME)/.ipfs_data
 SRC_DIR=$(shell cd .. && pwd)/src
-RESOURCES_DIR=$(shell cd .. && pwd)/resources
+RESOURCES_DIR=$(SRC_DIR)/resources
 SLICES_HTML=slices.html
 
 slices:
-	sh export_slices.sh $(SLICES_HTML) slices.json
+	sh export_slices.sh $(SLICES_HTML) $(RESOURCES_DIR)/slices.json
 
 tokens: slices
-	node generate_tokens.js slices.json tokens.json
+	node generate_tokens.js $(RESOURCES_DIR)/slices.json $(RESOURCES_DIR)/tokens.json
 
-install: image_config tokens
-	cp image_config.js $(SRC_DIR)
+resources_dir:
 	mkdir -p $(RESOURCES_DIR)
-	cp tokens.json $(RESOURCES_DIR)
+
+install: resources_dir tokens image_config
 
 image_config: tokens slices
-	node generate_image_config.js slices.json tokens.json image_config.js
+	node generate_image_config.js $(RESOURCES_DIR)/slices.json $(RESOURCES_DIR)/tokens.json $(RESOURCES_DIR)/image_config.json
 
 deploy: install
 	sh deploy_ipfs.sh -d=$(IPFS_DATA) -p=$(SRC_DIR)
@@ -26,4 +26,4 @@ deploy: install
 .PHONY=clean
 
 clean:
-	rm -f slices.json tokens.json image_config.js
+	rm -f $(RESOURCES_DIR)/slices.json $(RESOURCES_DIR)/tokens.json $(RESOURCES_DIR)/image_config.json
