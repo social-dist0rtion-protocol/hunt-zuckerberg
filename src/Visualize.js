@@ -50,7 +50,7 @@ class Visualize extends Component {
                   height: height
                 }}>
                 <img
-                  src={require("./images/puzzle/" + image)}
+                  src={"./images/puzzle/" + image}
                   width={width}
                   height={height}
                   alt=""
