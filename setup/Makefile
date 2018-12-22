@@ -1,7 +1,8 @@
 .DEFAULT_GOAL := image_config
 
-SRC_DIR=../src
-RESOURCES_DIR=../resources
+IPFS_DATA_DIR=$(HOME)/.ipfs_data
+SRC_DIR=$(shell cd .. && pwd)/src
+RESOURCES_DIR=$(shell cd .. && pwd)/resources
 SLICES_HTML=slices.html
 
 slices:
@@ -17,6 +18,10 @@ install: image_config tokens
 
 image_config: tokens slices
 	node generate_image_config.js slices.json tokens.json image_config.js
+
+deploy: install
+	sh deploy_ipfs.sh -d=$(IPFS_DATA) -p=$(SRC_DIR)
+
 
 .PHONY=clean
 
