@@ -4,4 +4,5 @@
 build/*
 node_modules/*
 package-lock.json
-
+ethereum/build
+src/resources
