@@ -28,7 +28,6 @@
   "bugs": {
     "url": "https://github.com/sirnicolaz/hunt-zuckerberg/issues"
   },
-  "homepage": "https://github.com/sirnicolaz/hunt-zuckerberg#readme",
   "dependencies": {
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
