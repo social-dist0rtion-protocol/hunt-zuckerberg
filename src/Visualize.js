@@ -10,7 +10,7 @@ class Visualize extends Component {
 
   async componentDidMount() {
     const web3 = await getWeb3Anon();
-    const account = (await web3.eth.getAccounts())[0];
+    const [account="none"] = await web3.eth.getAccounts();
     const contract = await getContract(web3, "HuntZuckerberg");
     const activatedCodes = (await contract.methods
       .getActivatedHashedCodes()
