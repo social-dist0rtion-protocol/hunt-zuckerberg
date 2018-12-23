@@ -30,4 +30,4 @@ deploy: build
 .PHONY=clean
 
 clean:
-	rm -rf build build.tar $(RESOURCES_DIR)/slices.json $(RESOURCES_DIR)/tokens.json $(RESOURCES_DIR)/image_config.json
+	rm -rf build build.tar
