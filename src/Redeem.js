@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import { getWeb3, getWeb3Anon, getContract, isWallet } from "./util";
 import { Link } from "react-router-dom";
 
+const IMAGE_CONFIG = require("./resources/image_config");
+
 class Redeem extends Component {
   constructor(props) {
     super(props);
@@ -24,10 +26,6 @@ class Redeem extends Component {
     const tokenToPlayer = await contract.methods
       .hashedCodeToPlayer(Web3Utils.keccak256(this.props.match.params.token))
       .call();
-    console.log(
-      tokenToPlayer,
-      Web3Utils.keccak256(this.props.match.params.token)
-    );
     this.setState({
       isTokenRedeemed:
         tokenToPlayer !== "0x0000000000000000000000000000000000000001"
@@ -36,7 +34,12 @@ class Redeem extends Component {
 
   render() {
     const token = this.props.match.params.token;
+    const hexToken = Web3Utils.keccak256(token);
+    if (!IMAGE_CONFIG[hexToken]) {
+      return <h1>Invalid Token</h1>;
+    }
     const { isTokenRedeemed } = this.state;
+    const { image } = IMAGE_CONFIG[hexToken];
 
     return (
       <div className="Redeem">
@@ -44,10 +47,14 @@ class Redeem extends Component {
 
         <p>
           Mark Zuckerberg has been decentralized and spread around the 35c3.
-          Redeem this token and help us rebuilding Mark.
+          Redeem this token and help us rebuilding The Mark™.
         </p>
         <div className="token">
           <h2>{token}</h2>
+          <img
+            src={process.env.PUBLIC_URL + "/images/puzzle/" + image}
+            alt=""
+          />
           <button
             disabled={isTokenRedeemed}
             onClick={this.handleRedeem.bind(this)}
