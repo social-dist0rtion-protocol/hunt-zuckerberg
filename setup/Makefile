@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := image_config
 
-IPFS_NODE_IP=63.32.111.83
+IPFS_NODE_IP=52.213.170.144
 IPFS_DATA_DIR=$(HOME)/.ipfs_data
 SRC_DIR=$(shell cd .. && pwd)/src
 RESOURCES_DIR=$(SRC_DIR)/resources
