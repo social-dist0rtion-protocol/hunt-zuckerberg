@@ -1,33 +1,42 @@
-import Web3Utils from "web3-utils";
 import React, { Component } from "react";
-import { getWeb3Anon, getContract } from "./util";
+import { getWeb3Anon, getContract, toUint256 } from "./util";
 const IMAGE_CONFIG = require("./resources/image_config");
 
 class Visualize extends Component {
   constructor(props) {
     super(props);
-    this.state = { activatedCodes: [] };
+    this.state = { activatedCodes: [], owners: {} };
   }
 
   async componentDidMount() {
     const web3 = await getWeb3Anon();
+    const account = (await web3.eth.getAccounts())[0];
     const contract = await getContract(web3, "HuntZuckerberg");
-    const activatedCodes = await contract.methods
+    const activatedCodes = (await contract.methods
       .getActivatedHashedCodes()
-      .call();
-    console.log(activatedCodes);
+      .call()).map(code => toUint256(code));
     this.setState({
-      activatedCodes: activatedCodes
+      activatedCodes: activatedCodes,
+      account: account
+    });
+    activatedCodes.map(async code => {
+      const tokenToPlayer = await contract.methods
+        .hashedCodeToPlayer(code)
+        .call();
+      const owners = this.state.owners;
+      owners[code] = tokenToPlayer;
+      this.setState({ owners: owners });
     });
   }
 
   render() {
-    let { activatedCodes } = this.state;
+    let { activatedCodes, account, owners } = this.state;
+    console.log(this.state);
     if (!activatedCodes) {
       activatedCodes = [];
     }
     return (
-      <div className="App">
+      <div className="Visualize">
         <div
           style={{
             position: "relative",
@@ -37,12 +46,12 @@ class Visualize extends Component {
           }}
         >
           {activatedCodes.map(function(code) {
-            const hexCode = Web3Utils.toHex(code);
-            console.log(hexCode);
-            const { image, left, top, width, height } = IMAGE_CONFIG[hexCode];
+            const { image, left, top, width, height } = IMAGE_CONFIG[code];
+
             return (
               <div
-                key={hexCode}
+                key={code}
+                className={owners[code] === account ? "mine" : ""}
                 style={{
                   position: "absolute",
                   left: left,

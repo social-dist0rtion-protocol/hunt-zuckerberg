@@ -1,4 +1,5 @@
 import Web3 from "web3";
+import Web3Utils from "web3-utils";
 
 const CONTRACTS = {
   HuntZuckerberg: require("./resources/contracts/HuntZuckerberg.json")
@@ -60,6 +61,10 @@ export function getWeb3Anon(localProvider) {
 
 export function isWallet() {
   return !!(window.web3 || window.ethereum);
+}
+
+export function toUint256(i) {
+  return Web3Utils.padLeft(Web3Utils.toHex(i), 64);
 }
 
 export async function isConnected(web3) {
