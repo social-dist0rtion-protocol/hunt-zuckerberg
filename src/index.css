@@ -61,12 +61,18 @@ main {
 }
 
 /* PAGES */
+/* Redeem */
 .Redeem .token {
   text-align: center;
   padding: 20px 10px;
   border: 1px solid #8b9dc3;
   background-color: #dfe3ee;
   margin: 20px 0;
+}
+
+.Redeem .token img {
+  margin-top: 10px;
+  width: 100%;
 }
 
 .Redeem .token button {
