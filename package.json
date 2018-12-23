@@ -20,9 +20,12 @@
     "type": "git",
     "url": "git+https://github.com/sirnicolaz/hunt-zuckerberg.git"
   },
-  "keywords": ["mark"],
+  "keywords": [
+    "mark"
+  ],
   "author": "Social Dist0rtion Protocol",
   "license": "MPL-2.0",
+  "homepage": "https://ipfs.io/ipns/QmUPqfrehKKCQ6LVN9jXbNZrEQpmmsLa2AVkeSrYfUhd1s/",
   "bugs": {
     "url": "https://github.com/sirnicolaz/hunt-zuckerberg/issues"
   },
@@ -39,13 +42,19 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
     "scrypt": "^6.0.3",
+    "seedrandom": "^2.4.4",
     "truffle": "^4.1.14",
     "truffle-hdwallet-provider": "0.0.6",
     "truffle-wallet-provider": "0.0.5",
     "web3": "^1.0.0-beta.34",
     "web3-utils": "^1.0.0-beta.36"
   },
-  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"],
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "devDependencies": {
     "uuid": "^3.3.2"
   }

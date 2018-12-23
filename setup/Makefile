@@ -1,5 +1,6 @@
 .DEFAULT_GOAL := image_config
 
+IPFS_NODE_IP=63.32.111.83
 IPFS_DATA_DIR=$(HOME)/.ipfs_data
 SRC_DIR=$(shell cd .. && pwd)/src
 RESOURCES_DIR=$(SRC_DIR)/resources
@@ -19,11 +20,14 @@ install: resources_dir tokens image_config
 image_config: tokens slices
 	node generate_image_config.js $(RESOURCES_DIR)/slices.json $(RESOURCES_DIR)/tokens.json $(RESOURCES_DIR)/image_config.json
 
-deploy: install
-	sh deploy_ipfs.sh -d=$(IPFS_DATA) -p=$(SRC_DIR)
+build: install
+	cd ../ && npm run build
 
+deploy: build
+	cp -rf ../build .
+	sh deploy.sh build $(IPFS_NODE_IP)
 
 .PHONY=clean
 
 clean:
-	rm -f $(RESOURCES_DIR)/slices.json $(RESOURCES_DIR)/tokens.json $(RESOURCES_DIR)/image_config.json
+	rm -rf build build.tar $(RESOURCES_DIR)/slices.json $(RESOURCES_DIR)/tokens.json $(RESOURCES_DIR)/image_config.json
