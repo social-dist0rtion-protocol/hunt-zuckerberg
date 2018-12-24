@@ -1,4 +1,5 @@
 import Web3 from "web3";
+import Web3Utils from "web3-utils";
 
 const CONTRACTS = {
   HuntZuckerberg: require("./resources/contracts/HuntZuckerberg.json")
@@ -35,7 +36,10 @@ function resolveWeb3(resolve, localProvider, authentication) {
 
 function _getWeb3(localProvider, authentication) {
   if (localProvider === undefined) {
-    localProvider = "http://localhost:8545";
+    localProvider =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:8545"
+        : "https://rinkeby.infura.io/";
   }
 
   return new Promise(resolve => {
@@ -60,6 +64,13 @@ export function getWeb3Anon(localProvider) {
 
 export function isWallet() {
   return !!(window.web3 || window.ethereum);
+}
+
+export function toHexAndPad(i, padding) {
+  if (padding === undefined) {
+    padding = 64;
+  }
+  return Web3Utils.padLeft(Web3Utils.toHex(i), padding);
 }
 
 export async function isConnected(web3) {
