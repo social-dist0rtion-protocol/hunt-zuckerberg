@@ -1,7 +1,7 @@
-import Web3Utils from "web3-utils";
 import React, { Component } from "react";
+import { withRouter, Link } from "react-router-dom";
+import Web3Utils from "web3-utils";
 import { getWeb3, getWeb3Anon, getContract, isWallet } from "./util";
-import { Link } from "react-router-dom";
 
 const IMAGE_CONFIG = require("./resources/image_config");
 
@@ -90,4 +90,4 @@ class Redeem extends Component {
   }
 }
 
-export default Redeem;
+export default withRouter(Redeem);

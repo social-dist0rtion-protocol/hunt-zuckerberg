@@ -36,7 +36,10 @@ function resolveWeb3(resolve, localProvider, authentication) {
 
 function _getWeb3(localProvider, authentication) {
   if (localProvider === undefined) {
-    localProvider = "http://localhost:8545";
+    localProvider =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:8545"
+        : "https://rinkeby.infura.io/";
   }
 
   return new Promise(resolve => {
@@ -63,8 +66,11 @@ export function isWallet() {
   return !!(window.web3 || window.ethereum);
 }
 
-export function toUint256(i) {
-  return Web3Utils.padLeft(Web3Utils.toHex(i), 64);
+export function toHexAndPad(i, padding) {
+  if (padding === undefined) {
+    padding = 64;
+  }
+  return Web3Utils.padLeft(Web3Utils.toHex(i), padding);
 }
 
 export async function isConnected(web3) {

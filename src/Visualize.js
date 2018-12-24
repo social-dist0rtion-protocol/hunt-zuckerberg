@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getWeb3Anon, getContract, toUint256 } from "./util";
+import { getWeb3Anon, getContract, toHexAndPad } from "./util";
 const IMAGE_CONFIG = require("./resources/image_config");
 
 class Visualize extends Component {
@@ -14,7 +14,7 @@ class Visualize extends Component {
     const contract = await getContract(web3, "HuntZuckerberg");
     const activatedCodes = (await contract.methods
       .getActivatedHashedCodes()
-      .call()).map(code => toUint256(code));
+      .call()).map(code => toHexAndPad(code));
     this.setState({
       activatedCodes: activatedCodes,
       account: account
@@ -31,7 +31,6 @@ class Visualize extends Component {
 
   render() {
     let { activatedCodes, account, owners } = this.state;
-    console.log(this.state);
     if (!activatedCodes) {
       activatedCodes = [];
     }
