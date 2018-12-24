@@ -4,12 +4,15 @@ Decentralized Treasure Hunt
 ## Setup
 Before starting, you need a Photoshop generated HTML file, containing all the information of the puzzle image slices. Then:
 ```
+cd ethereum
+truffle migrate --reset
 mv <your photoshop file> setup/slices.html
-cd setup
-make install
+cd ../setup
+make deploy
 ```
-After this, you can run the truffle migration script and the app.
-
+This will generate the necessary configuration files, move the contracts in the src dir, build and deploy to a running IPFS node.
+For the deployment to the node you need to have your public key authorized. Contact @sirnicolaz for this.
+At the end, the website will be deployed to ipfs and published to the node, accessible then via IPNS.
 ## Run DApp
 You need a network to deploy the contract for the game. You can use [Ganache][ganache], [Ganache CLI][ganache:cli], a (test) network through [infura][infura], or your own node.
 
@@ -26,3 +29,4 @@ Try `npm run dev` to compile the game, compile the smart contracts, run ganache,
 [ganache]: https://truffleframework.com/ganache
 [ganache:cli]: https://github.com/trufflesuite/ganache-cli
 [infura]: https://infura.io/
+
