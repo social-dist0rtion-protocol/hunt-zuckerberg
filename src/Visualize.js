@@ -42,8 +42,7 @@ class Visualize extends Component {
             margin: "auto",
             width: "2480px",
             height: "1656px"
-          }}
-        >
+          }}>
           {activatedCodes.map(function(code) {
             const { image, left, top, width, height } = IMAGE_CONFIG[code];
 
@@ -57,8 +56,7 @@ class Visualize extends Component {
                   top: top,
                   width: width,
                   height: height
-                }}
-              >
+                }}>
                 <img
                   src={process.env.PUBLIC_URL + "/images/puzzle/" + image}
                   width={width}

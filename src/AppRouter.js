@@ -3,7 +3,7 @@ import About from "./About";
 import Redeem from "./Redeem";
 import NotFound from "./NotFound";
 import Visualize from "./Visualize";
-import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 const Index = () => <h2>Home</h2>;
 
@@ -16,13 +16,13 @@ const AppRouter = () => (
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to={`${process.env.PUBLIC_URL}/`}>Home</Link>
             </li>
             <li>
-              <Link to="/about/">About</Link>
+              <Link to={`${process.env.PUBLIC_URL}/about/`}>About</Link>
             </li>
             <li>
-              <Link to="/visualize/">Visualize</Link>
+              <Link to={`${process.env.PUBLIC_URL}/visualize/`}>Visualize</Link>
             </li>
           </ul>
         </nav>
@@ -30,10 +30,16 @@ const AppRouter = () => (
 
       <main>
         <Switch>
-          <Route path="/" exact component={Index} />
-          <Route path="/redeem/:token" component={Redeem} />
-          <Route path="/about/" component={About} />
-          <Route path="/visualize/" component={Visualize} />
+          <Route path={`${process.env.PUBLIC_URL}/`} exact component={Index} />
+          <Route
+            path={`${process.env.PUBLIC_URL}/redeem/:token`}
+            component={Redeem}
+          />
+          <Route path={`${process.env.PUBLIC_URL}/about/`} component={About} />
+          <Route
+            path={`${process.env.PUBLIC_URL}/visualize/`}
+            component={Visualize}
+          />
           <Route component={NotFound} />
         </Switch>
       </main>
