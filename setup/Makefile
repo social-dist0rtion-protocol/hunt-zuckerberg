@@ -1,5 +1,6 @@
 .DEFAULT_GOAL := image_config
 
+GAME_SEED ?= test
 IPFS_NODE_IP=34.245.87.179
 IPFS_DATA_DIR=$(HOME)/.ipfs_data
 SRC_DIR=$(shell cd .. && pwd)/src
@@ -10,7 +11,7 @@ slices:
 	sh export_slices.sh $(SLICES_HTML) $(RESOURCES_DIR)/slices.json
 
 tokens: slices
-	node generate_tokens.js $(RESOURCES_DIR)/slices.json $(RESOURCES_DIR)/tokens.json diobestia
+	node generate_tokens.js $(RESOURCES_DIR)/slices.json $(RESOURCES_DIR)/tokens.json $(GAME_SEED)
 
 resources_dir:
 	mkdir -p $(RESOURCES_DIR)
