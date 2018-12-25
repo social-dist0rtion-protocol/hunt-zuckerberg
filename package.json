@@ -12,7 +12,7 @@
     "eject": "react-scripts eject",
     "predev": "npm run build-tokens",
     "dev": "concurrently --kill-others-on-fail npm:start npm:ganache-start npm:truffle-migrate",
-    "build-tokens": "cd setup && make install",
+    "build-tokens": "cd setup && make generate_game",
     "ganache-start": "ganache-cli -m test -q",
     "truffle-migrate": "cd ethereum && truffle migrate"
   },
