@@ -3,13 +3,12 @@ const web3 = require("web3");
 const seedrandom = require("seedrandom");
 const fs = require("fs");
 
-function generateToken(prng, bits, chars) {
-  if (chars === undefined) {
-    chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-  }
+const CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+function generateToken(prng, bits) {
   let token = "";
-  for (let i = 0; i < Math.ceil(bits / Math.log2(chars.length)); i++) {
-    token += chars[Math.floor(prng() * chars.length)];
+  for (let i = 0; i < Math.ceil(bits / Math.log2(CHARS.length)); i++) {
+    token += CHARS[Math.floor(prng() * CHARS.length)];
   }
   return token;
 }
@@ -18,13 +17,7 @@ function generateTokens(seed, count) {
   var tokenMap = {};
   const rnd = seedrandom(seed);
   while (count-- > 0) {
-    var source = "";
-    var parts = [];
-    // Each call of rnd generates 32 bits of randomness in a float.
-    for (var i = 0; i < 4; i++) {
-      parts.push(web3.utils.keccak256(rnd().toString()).substr(2, 8));
-    }
-    const token = parts.join("-");
+    const token = generateToken(rnd, 128);
     const hashedToken = web3.utils.keccak256(token);
     tokenMap[token] = hashedToken;
   }
