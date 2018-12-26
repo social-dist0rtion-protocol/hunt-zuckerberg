@@ -1,5 +1,7 @@
 .DEFAULT_GOAL := image_config
 
+STAGE ?= base
+GITHUB_PAGES_ACCOUNT=social-dist0rtion-protocol
 IPFS_NODE_IP=34.245.87.179
 IPFS_DATA_DIR=$(HOME)/.ipfs_data
 SRC_DIR=$(shell cd .. && pwd)/src
@@ -23,14 +25,26 @@ image_config: tokens slices
 contracts:
 	cp -rf ../ethereum/contracts $(RESOURCES_DIR)
 
-build: install contracts
+build: node_package install contracts
 	cd ../ && npm run build
 
-deploy: build
+node_package:
+	@cd ../ && penv $(STAGE)
+
+deploy_ipfs: build
 	cp -rf ../build .
 	sh deploy.sh build $(IPFS_NODE_IP)
+
+deploy_base: build
+	@ls $(GITHUB_PAGES_ACCOUNT).github.io || git clone git@github.com:$(GITHUB_PAGES_ACCOUNT)/$(GITHUB_PAGES_ACCOUNT).github.io.git
+	cd $(GITHUB_PAGES_ACCOUNT).github.io && git pull
+	@cp -rf ../build/* $(GITHUB_PAGES_ACCOUNT).github.io/
+	@cd $(GITHUB_PAGES_ACCOUNT).github.io && git add * && git commit -m "auto update" && git push || true
+
+deploy: deploy_$(STAGE)
+	@echo "Deployment done."
 
 .PHONY=clean
 
 clean:
-	rm -rf build build.tar
+	rm -rf build build.tar $(GITHUB_PAGES_ACCOUNT).github.io
