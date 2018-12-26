@@ -1,10 +1,6 @@
 # hunt-zuckerberg
 Decentralized Treasure Hunt
 
-## Requirements
-penv
-`npm install -g penv`
-
 ## Setup and deploy
 Before starting, you need a Photoshop generated HTML file, containing all the information of the puzzle image slices. Then:
 ```

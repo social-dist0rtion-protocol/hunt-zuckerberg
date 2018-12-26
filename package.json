@@ -20,11 +20,10 @@
     "type": "git",
     "url": "git+https://github.com/sirnicolaz/hunt-zuckerberg.git"
   },
-  "keywords": [
-    "mark"
-  ],
+  "keywords": ["mark"],
   "author": "Social Dist0rtion Protocol",
   "license": "MPL-2.0",
+  "homepage": "./",
   "bugs": {
     "url": "https://github.com/sirnicolaz/hunt-zuckerberg/issues"
   },
@@ -48,12 +47,7 @@
     "web3": "^1.0.0-beta.34",
     "web3-utils": "^1.0.0-beta.36"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
+  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"],
   "devDependencies": {
     "uuid": "^3.3.2"
   }
