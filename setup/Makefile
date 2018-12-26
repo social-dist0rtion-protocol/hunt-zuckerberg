@@ -19,6 +19,7 @@ slices:
 	@sh export_slices.sh $(SLICES_HTML) $(RESOURCES_DIR)/slices.json
 
 qrcodes:
+	@echo "Generate qrcodes file $(GREEN_COLOR)qrcodes.$(SEED).html$(NO_COLOR)"
 	@node generate_qrcodes $(RESOURCES_DIR)/tokens.json $(SEED) > qrcodes.$(SEED).html
 
 tokens: slices
@@ -28,7 +29,7 @@ tokens: slices
 resources_dir:
 	@mkdir -p $(RESOURCES_DIR)
 
-generate_game: resources_dir tokens image_config
+generate_game: resources_dir tokens image_config qrcodes
 
 image_config: tokens slices
 	@echo "Generate image configuration in $(GREEN_COLOR)$(RESOURCES_DIR)/image_config.json$(NO_COLOR)"
