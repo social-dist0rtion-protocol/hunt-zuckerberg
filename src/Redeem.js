@@ -53,10 +53,7 @@ class Redeem extends Component {
         </p>
         <div className="token">
           <h2>{token}</h2>
-          <img
-            src={process.env.PUBLIC_URL + "/images/puzzle/" + image}
-            alt=""
-          />
+          <img src={`./images/puzzle/${image}`} alt="" />
           <button
             disabled={isTokenRedeemed}
             onClick={this.handleRedeem.bind(this)}

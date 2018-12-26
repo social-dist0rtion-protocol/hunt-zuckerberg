@@ -1,14 +1,21 @@
 # hunt-zuckerberg
 Decentralized Treasure Hunt
 
-## Setup
+## Setup and deploy
 Before starting, you need a Photoshop generated HTML file, containing all the information of the puzzle image slices. Then:
 ```
-cd ethereum
-truffle migrate --reset
+(cd ethereum && truffle migrate --reset)
 mv <your photoshop file> setup/slices.html
-cd ../setup
+```
+### Deploy github
+```
+cd setup
 make deploy
+```
+### Deploy ipfs
+```
+cd setup
+STAGE=ipfs make deploy
 ```
 This will generate the necessary configuration files, move the contracts in the src dir, build and deploy to a running IPFS node.
 For the deployment to the node you need to have your public key authorized. Contact @sirnicolaz for this.

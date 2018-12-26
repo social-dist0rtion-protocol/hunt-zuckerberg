@@ -20,12 +20,10 @@
     "type": "git",
     "url": "git+https://github.com/sirnicolaz/hunt-zuckerberg.git"
   },
-  "keywords": [
-    "mark"
-  ],
+  "keywords": ["mark"],
   "author": "Social Dist0rtion Protocol",
   "license": "MPL-2.0",
-  "homepage": "https://ipfs.io/ipns/QmUPqfrehKKCQ6LVN9jXbNZrEQpmmsLa2AVkeSrYfUhd1s/",
+  "homepage": "./",
   "bugs": {
     "url": "https://github.com/sirnicolaz/hunt-zuckerberg/issues"
   },
@@ -37,6 +35,7 @@
     "ganache-cli": "^6.2.5",
     "mocha": "^5.2.0",
     "openzeppelin-solidity": "^2.0.0",
+    "qrcode": "^1.3.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-jazzicon": "^0.1.3",
@@ -50,12 +49,7 @@
     "web3": "^1.0.0-beta.34",
     "web3-utils": "^1.0.0-beta.36"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
+  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"],
   "devDependencies": {
     "uuid": "^3.3.2"
   }
