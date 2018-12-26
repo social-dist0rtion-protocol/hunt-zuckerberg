@@ -26,9 +26,7 @@ const AppRouter = () => (
               <Link to="/visualize/">Visualize</Link>
             </li>
             <li>
-              <Link to={`${process.env.PUBLIC_URL}/leader-board/`}>
-                Leader Board
-              </Link>
+              <Link to="/leader-board/">Leader Board</Link>
             </li>
           </ul>
         </nav>
