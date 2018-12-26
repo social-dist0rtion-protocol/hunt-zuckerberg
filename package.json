@@ -12,7 +12,7 @@
     "eject": "react-scripts eject",
     "predev": "npm run build-tokens",
     "dev": "concurrently --kill-others-on-fail npm:start npm:ganache-start npm:truffle-migrate",
-    "build-tokens": "cd setup && make install",
+    "build-tokens": "cd setup && make generate_game",
     "ganache-start": "ganache-cli -m test -q",
     "truffle-migrate": "cd ethereum && truffle migrate"
   },
@@ -20,7 +20,9 @@
     "type": "git",
     "url": "git+https://github.com/sirnicolaz/hunt-zuckerberg.git"
   },
-  "keywords": ["mark"],
+  "keywords": [
+    "mark"
+  ],
   "author": "Social Dist0rtion Protocol",
   "license": "MPL-2.0",
   "homepage": "./",
@@ -49,7 +51,12 @@
     "web3": "^1.0.0-beta.34",
     "web3-utils": "^1.0.0-beta.36"
   },
-  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"],
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "devDependencies": {
     "uuid": "^3.3.2"
   }
