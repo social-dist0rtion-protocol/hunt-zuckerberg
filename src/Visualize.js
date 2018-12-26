@@ -60,7 +60,7 @@ class Visualize extends Component {
                 }}
               >
                 <img
-                  src={process.env.PUBLIC_URL + "/images/puzzle/" + image}
+                  src={`./images/puzzle/${image}`}
                   width={width}
                   height={height}
                   alt=""

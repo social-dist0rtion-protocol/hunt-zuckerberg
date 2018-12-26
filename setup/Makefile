@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := generate_game
 
 SEED ?= test
-STAGE ?= base
+STAGE ?= github
 GITHUB_PAGES_ACCOUNT=social-dist0rtion-protocol
 IPFS_NODE_IP=34.245.87.179
 IPFS_DATA_DIR=$(HOME)/.ipfs_data
@@ -34,17 +34,14 @@ image_config: tokens slices
 contracts:
 	cp -rf ../ethereum/contracts $(RESOURCES_DIR)
 
-build: node_package install contracts
+build: generate_game contracts
 	cd ../ && npm run build
-
-node_package:
-	@cd ../ && penv $(STAGE)
 
 deploy_ipfs: build
 	cp -rf ../build .
 	sh deploy.sh build $(IPFS_NODE_IP)
 
-deploy_base: build
+deploy_github: build
 	@ls $(GITHUB_PAGES_ACCOUNT).github.io || git clone git@github.com:$(GITHUB_PAGES_ACCOUNT)/$(GITHUB_PAGES_ACCOUNT).github.io.git
 	cd $(GITHUB_PAGES_ACCOUNT).github.io && git pull
 	@cp -rf ../build/* $(GITHUB_PAGES_ACCOUNT).github.io/
