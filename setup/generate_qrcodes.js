@@ -1,7 +1,7 @@
 const QRCode = require("qrcode");
 
 const tokens = require(process.argv[2]);
-const { homepage } = require("../package.json");
+const seed = process.argv[3];
 const SIZE = 180;
 
 const titles = [

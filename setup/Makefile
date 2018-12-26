@@ -19,7 +19,7 @@ slices:
 	@sh export_slices.sh $(SLICES_HTML) $(RESOURCES_DIR)/slices.json
 
 qrcodes:
-	@node generate_qrcodes $(RESOURCES_DIR)/tokens.json
+	@node generate_qrcodes $(RESOURCES_DIR)/tokens.json $(SEED) > qrcodes.$(SEED).html
 
 tokens: slices
 	@echo "Generate tokens using seed $(GREEN_COLOR)$(SEED)$(NO_COLOR)"
