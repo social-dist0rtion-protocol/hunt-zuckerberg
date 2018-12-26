@@ -9,6 +9,9 @@ SLICES_HTML=slices.html
 slices:
 	sh export_slices.sh $(SLICES_HTML) $(RESOURCES_DIR)/slices.json
 
+qrcodes:
+	@node generate_qrcodes $(RESOURCES_DIR)/tokens.json
+
 tokens: slices
 	node generate_tokens.js $(RESOURCES_DIR)/slices.json $(RESOURCES_DIR)/tokens.json diobestia
 
