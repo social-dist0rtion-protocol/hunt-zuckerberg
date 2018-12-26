@@ -25,7 +25,6 @@
   ],
   "author": "Social Dist0rtion Protocol",
   "license": "MPL-2.0",
-  "homepage": "https://ipfs.io/ipns/QmUPqfrehKKCQ6LVN9jXbNZrEQpmmsLa2AVkeSrYfUhd1s/",
   "bugs": {
     "url": "https://github.com/sirnicolaz/hunt-zuckerberg/issues"
   },
@@ -57,5 +56,9 @@
   ],
   "devDependencies": {
     "uuid": "^3.3.2"
+  },
+  "homepage": "https://ipfs.io/ipns/QmUPqfrehKKCQ6LVN9jXbNZrEQpmmsLa2AVkeSrYfUhd1s/",
+  "env": {
+    "NODE_ENV": "ipfs"
   }
 }
