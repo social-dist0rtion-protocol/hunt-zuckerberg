@@ -18,6 +18,9 @@ slices:
 	@echo "Export image slices to $(GREEN_COLOR)$(RESOURCES_DIR)/slices.json$(NO_COLOR)"
 	@sh export_slices.sh $(SLICES_HTML) $(RESOURCES_DIR)/slices.json
 
+qrcodes:
+	@node generate_qrcodes $(RESOURCES_DIR)/tokens.json
+
 tokens: slices
 	@echo "Generate tokens using seed $(GREEN_COLOR)$(SEED)$(NO_COLOR)"
 	@node generate_tokens.js $(RESOURCES_DIR)/slices.json $(RESOURCES_DIR)/tokens.json $(SEED)
