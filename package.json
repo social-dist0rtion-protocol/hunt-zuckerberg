@@ -12,7 +12,7 @@
     "eject": "react-scripts eject",
     "predev": "npm run build-tokens",
     "dev": "concurrently --kill-others-on-fail npm:start npm:ganache-start npm:truffle-migrate",
-    "build-tokens": "cd setup && make generate_game",
+    "build-tokens": "cd setup && make install",
     "ganache-start": "ganache-cli -m test -q",
     "truffle-migrate": "cd ethereum && truffle migrate"
   },
@@ -56,9 +56,5 @@
   ],
   "devDependencies": {
     "uuid": "^3.3.2"
-  },
-  "homepage": "https://ipfs.io/ipns/QmUPqfrehKKCQ6LVN9jXbNZrEQpmmsLa2AVkeSrYfUhd1s/",
-  "env": {
-    "NODE_ENV": "ipfs"
   }
 }

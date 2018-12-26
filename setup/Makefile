@@ -34,7 +34,7 @@ image_config: tokens slices
 contracts:
 	cp -rf ../ethereum/contracts $(RESOURCES_DIR)
 
-build: node_package install contracts
+build: generate_game contracts
 	cd ../ && npm run build
 
 node_package:
