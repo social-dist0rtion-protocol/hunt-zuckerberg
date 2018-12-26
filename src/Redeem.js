@@ -23,9 +23,11 @@ class Redeem extends Component {
   async componentDidMount() {
     const web3 = await getWeb3Anon();
     const contract = await getContract(web3, "HuntZuckerberg");
+    window.contract = contract;
     const tokenToPlayer = await contract.methods
       .hashedCodeToPlayer(Web3Utils.keccak256(this.props.match.params.token))
       .call();
+    console.log(tokenToPlayer);
     this.setState({
       isTokenRedeemed:
         tokenToPlayer !== "0x0000000000000000000000000000000000000001"

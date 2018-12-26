@@ -3,6 +3,7 @@ import About from "./About";
 import Redeem from "./Redeem";
 import NotFound from "./NotFound";
 import Visualize from "./Visualize";
+import LeaderBoard from "./LeaderBoard";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 const Index = () => <h2>Home</h2>;
@@ -24,6 +25,11 @@ const AppRouter = () => (
             <li>
               <Link to={`${process.env.PUBLIC_URL}/visualize/`}>Visualize</Link>
             </li>
+            <li>
+              <Link to={`${process.env.PUBLIC_URL}/leader-board/`}>
+                Leader Board
+              </Link>
+            </li>
           </ul>
         </nav>
       </header>
@@ -39,6 +45,10 @@ const AppRouter = () => (
           <Route
             path={`${process.env.PUBLIC_URL}/visualize/`}
             component={Visualize}
+          />
+          <Route
+            path={`${process.env.PUBLIC_URL}/leader-board/`}
+            component={LeaderBoard}
           />
           <Route component={NotFound} />
         </Switch>

@@ -86,3 +86,30 @@ main {
 .Visualize .mine {
   border: 1px solid red;
 }
+
+/* LeaderBoard */
+.LeaderBoard ol {
+  margin-top: 20px;
+}
+.LeaderBoard li {
+  list-style: none;
+}
+
+.LeaderBoard .jazzicon {
+  position: relative;
+  display: inline-block;
+}
+
+.LeaderBoard .tokens {
+  position: absolute;
+  font-size: 50px;
+  opacity: 0.5;
+  text-align: center;
+  top: 22px;
+  left: 0;
+  right: 0;
+}
+
+.LeaderBoard .owner {
+  font-size: 10px;
+}
