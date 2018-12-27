@@ -19,12 +19,12 @@ class Home extends Component {
           searching QR codes about MARK at the CCC. You will recognize them as
           soon as you find them.
           <br />
+          We will send out hints on Twitter every once in a while (stay in sync with @vrde #huntzuckerberg).</br>
           Each token can be redeemed with and Ethereum transaction (so you will
           need wallet enabled browser and some Ether on Rinkeby).
           <br />
           Once you find a ZUCKERBIT, you can come to the Social Dist0rtion
-          Protocol assembly and redeem a prize. The winner will get a YUBI
-          key!!!111 one
+          Protocol assembly to claim your bounty. The bounty hunter with the most ZUCKERBITS,  will get a YUBI key!!!111 one
         </p>
         <h1>Requirements</h1>
         <ul>
@@ -54,10 +54,10 @@ class Home extends Component {
             </ul>
           </li>
         </ul>
-        <h1>Prizes</h1>
+        <h1>Bounties</h1>
         <ul>
           <li>
-            For each unlocked MARK piece:
+            For each unlocked ZUCKERBIT::
             <ul>
               <li>Grappa</li>
               <li>Berliner Luft</li>
@@ -66,9 +66,11 @@ class Home extends Component {
           </li>
           <li>
             For the winner (most ZUCKERBITS collected): a brand new{" "}
-            <b>Yubi Key</b>
+            <b>Yubi Key</b> + the remaining bounties.
           </li>
         </ul>
+        <h1>Technical stuff</h1>
+        We are running the web application as a rich js client getting the state from the Ethereum. The whole progress of the hunt is transparently tracked and updated with Ethereum smart contracts. Because you deserve trust.
       </div>
     );
   }

@@ -2,6 +2,7 @@
 
 SEED ?= test
 STAGE ?= github
+IPFS_NODE_IP=34.245.87.179
 GITHUB_PAGES_ACCOUNT=social-dist0rtion-protocol
 IPFS_DATA_DIR=$(HOME)/.ipfs_data
 SRC_DIR=$(shell cd .. && pwd)/src
@@ -42,7 +43,7 @@ build: generate_game contracts
 
 deploy_ipfs: build
 	cp -rf ../build .
-	sh deploy.sh build $(IPFS_NODE_IP)
+	@bash deploy.sh build $(IPFS_NODE_IP)
 
 deploy_github: build
 	@ls $(GITHUB_PAGES_ACCOUNT).github.io || git clone git@github.com:$(GITHUB_PAGES_ACCOUNT)/$(GITHUB_PAGES_ACCOUNT).github.io.git
