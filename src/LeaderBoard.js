@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { getWeb3Anon, getContract, toHexAndPad } from "./util";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 
-const IMAGE_CONFIG = require("./resources/image_config");
-
 class LeaderBoard extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +33,7 @@ class LeaderBoard extends Component {
     let items = Object.keys(owners).map(k => [k, owners[k]]);
     items.sort((a, b) => a[1] - b[1]);
     return (
-      <div className="LeaderBoard">
+      <div className="LeaderBoard narrow">
         <h1>Leader Board</h1>
         <p>List of all players and tokens redeemed</p>
         <ol>

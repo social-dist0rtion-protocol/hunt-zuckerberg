@@ -20,7 +20,7 @@ class Redeem extends Component {
       await contract.methods
         .redeem(this.props.match.params.token)
         .send({ from: account });
-      this.setState({ wasRedeemed: true, loading: false});
+      this.setState({ wasRedeemed: true, loading: false });
     } catch (err) {
       alert(err);
     }
@@ -55,7 +55,7 @@ class Redeem extends Component {
     const { image } = IMAGE_CONFIG[hexToken];
 
     return (
-      <div className="Redeem">
+      <div className="Redeem narrow">
         <h1>You've found a ZUCKERBIT!</h1>
         <p>
           Mark Zuckerberg has been decentralized and spread around the 35c3.
@@ -69,7 +69,9 @@ class Redeem extends Component {
             disabled={isTokenRedeemed}
             onClick={this.handleRedeem.bind(this)}
           >
-          { this.state.loading ? "Loading... It can take up to 15 seconds" : "Redeem"}
+            {this.state.loading
+              ? "Loading... It can take up to 15 seconds"
+              : "Redeem"}
           </button>
         </div>
         {this.state.wasRedeemed && (
