@@ -1,14 +1,16 @@
-import React from "react";
-import Home from "./Home";
-import Redeem from "./Redeem";
-import NotFound from "./NotFound";
-import Visualize from "./Visualize";
-import LeaderBoard from "./LeaderBoard";
-import { HashRouter as Router, Route, Link, Switch } from "react-router-dom";
+import React from 'react';
+import Home from './Home';
+import Redeem from './Redeem';
+import NotFound from './NotFound';
+import Visualize from './Visualize';
+import LeaderBoard from './LeaderBoard';
+import ConfettiCanvas from "./ConfettiCanvas";
+import {HashRouter as Router, Route, Link, Switch} from 'react-router-dom';
 
 const AppRouter = () => (
   <Router>
     <div>
+      <ConfettiCanvas />
       <header>
         <h1>Hunt Zuckerberg</h1>
         <h2>35c3 treasure hunt game!</h2>

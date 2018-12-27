@@ -68,6 +68,10 @@ main {
   background-color: yellow;
 }
 
+.success {
+    background-color: #00C853;
+}
+
 /* PAGES */
 /* Redeem */
 .Redeem .token {
