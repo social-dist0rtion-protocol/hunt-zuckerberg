@@ -12,12 +12,18 @@ class Redeem extends Component {
   }
 
   async handleRedeem() {
+    this.setState({ loading: true });
     const web3 = await getWeb3();
     const account = (await web3.eth.getAccounts())[0];
     const contract = await getContract(web3, "HuntZuckerberg");
-    contract.methods
-      .redeem(this.props.match.params.token)
-      .send({ from: account });
+    try {
+      await contract.methods
+        .redeem(this.props.match.params.token)
+        .send({ from: account });
+      this.setState({ wasRedeemed: true, loading: false});
+    } catch (err) {
+      alert(err);
+    }
   }
 
   async componentDidMount() {
@@ -27,11 +33,16 @@ class Redeem extends Component {
     const tokenToPlayer = await contract.methods
       .hashedCodeToPlayer(Web3Utils.keccak256(this.props.match.params.token))
       .call();
-    console.log(tokenToPlayer);
     this.setState({
       isTokenRedeemed:
         tokenToPlayer !== "0x0000000000000000000000000000000000000001"
     });
+  }
+
+  componentDidUpdate() {
+    if (this.state.wasRedeemed === true) {
+      window.confetti = "100%";
+    }
   }
 
   render() {
@@ -46,7 +57,6 @@ class Redeem extends Component {
     return (
       <div className="Redeem">
         <h1>You've found a ZUCKERBIT!</h1>
-
         <p>
           Mark Zuckerberg has been decentralized and spread around the 35c3.
           Redeem this token and help us reassemble the ZUCKERBITS into a
@@ -59,9 +69,14 @@ class Redeem extends Component {
             disabled={isTokenRedeemed}
             onClick={this.handleRedeem.bind(this)}
           >
-            Redeem
+          { this.state.loading ? "Loading..." : "Redeem"}
           </button>
         </div>
+        {this.state.wasRedeemed && (
+          <div className="success">
+            <p>You've successfully have redeemed a piece of Mark! Congraz!</p>
+          </div>
+        )}
 
         {!isWallet() && (
           <div className="alert warning">
