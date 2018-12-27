@@ -42,15 +42,14 @@ nav ul li {
   margin: 10px;
 }
 
-/* MAIN */
-main {
+.narrow {
   padding: 10px;
   width: 50%;
   margin: 0 auto;
 }
 
 @media (max-width: 600px) {
-  main {
+  .narrow {
     width: 100%;
     padding: 10px;
   }
@@ -69,7 +68,7 @@ main {
 }
 
 .success {
-    background-color: #00C853;
+  background-color: #00c853;
 }
 
 /* PAGES */
