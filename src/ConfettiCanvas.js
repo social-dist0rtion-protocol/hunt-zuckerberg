@@ -1,10 +1,10 @@
-import React from 'react';
-import sizeMe from 'react-sizeme';
-import Confetti from 'react-confetti';
+import React from "react";
+import sizeMe from "react-sizeme";
+import Confetti from "react-confetti";
 
 const ConfettiCanvas = sizeMe({
   monitorHeight: true,
-  monitorWidth: true,
+  monitorWidth: true
 })(
   class Example extends React.PureComponent {
     constructor(props) {

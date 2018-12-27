@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {withRouter, Link} from 'react-router-dom';
-import Web3Utils from 'web3-utils';
-import {getWeb3, getWeb3Anon, getContract, isWallet} from './util';
+import React, { Component } from "react";
+import { withRouter, Link } from "react-router-dom";
+import Web3Utils from "web3-utils";
+import { getWeb3, getWeb3Anon, getContract, isWallet } from "./util";
 
-const IMAGE_CONFIG = require('./resources/image_config');
+const IMAGE_CONFIG = require("./resources/image_config");
 
 class Redeem extends Component {
   constructor(props) {
@@ -28,14 +28,14 @@ class Redeem extends Component {
 
   async componentDidMount() {
     const web3 = await getWeb3Anon();
-    const contract = await getContract(web3, 'HuntZuckerberg');
+    const contract = await getContract(web3, "HuntZuckerberg");
     window.contract = contract;
     const tokenToPlayer = await contract.methods
       .hashedCodeToPlayer(Web3Utils.keccak256(this.props.match.params.token))
       .call();
     this.setState({
       isTokenRedeemed:
-        tokenToPlayer !== '0x0000000000000000000000000000000000000001',
+        tokenToPlayer !== "0x0000000000000000000000000000000000000001"
     });
   }
 
@@ -51,8 +51,8 @@ class Redeem extends Component {
     if (!IMAGE_CONFIG[hexToken]) {
       return <h1>Invalid Token</h1>;
     }
-    const {isTokenRedeemed} = this.state;
-    const {image} = IMAGE_CONFIG[hexToken];
+    const { isTokenRedeemed } = this.state;
+    const { image } = IMAGE_CONFIG[hexToken];
 
     return (
       <div className="Redeem">
@@ -67,15 +67,14 @@ class Redeem extends Component {
           <img src={`./images/puzzle/${image}`} alt="" />
           <button
             disabled={isTokenRedeemed}
-            onClick={this.handleRedeem.bind(this)}>
+            onClick={this.handleRedeem.bind(this)}
+          >
             Redeem
           </button>
         </div>
         {this.state.wasRedeemed && (
           <div className="success">
-            <p>
-                You've successfully have redeemed a piece of Mark! Congraz!
-            </p>
+            <p>You've successfully have redeemed a piece of Mark! Congraz!</p>
           </div>
         )}
 
@@ -83,13 +82,14 @@ class Redeem extends Component {
           <div className="alert warning">
             <p>
               You are not using an Ethereum compatible browser. In order to
-              redeem the token, you need to install{' '}
+              redeem the token, you need to install{" "}
               <a
                 href="https://metamask.io/"
                 target="_blank"
-                rel="noopener noreferrer">
+                rel="noopener noreferrer"
+              >
                 MetaMask
-              </a>{' '}
+              </a>{" "}
               on your browser.
             </p>
           </div>
