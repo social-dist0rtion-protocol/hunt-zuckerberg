@@ -31,7 +31,7 @@ class LeaderBoard extends Component {
   render() {
     let { account, owners } = this.state;
     let items = Object.keys(owners).map(k => [k, owners[k]]);
-    items.sort((a, b) => a[1] - b[1]);
+    items.sort((a, b) => b[1] - a[1]);
     return (
       <div className="LeaderBoard narrow">
         <h1>Leader Board</h1>
