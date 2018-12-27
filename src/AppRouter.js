@@ -1,11 +1,11 @@
-import React from "react";
-import Home from "./Home";
-import Redeem from "./Redeem";
-import NotFound from "./NotFound";
-import Visualize from "./Visualize";
-import LeaderBoard from "./LeaderBoard";
+import React from 'react';
+import Home from './Home';
+import Redeem from './Redeem';
+import NotFound from './NotFound';
+import Visualize from './Visualize';
+import LeaderBoard from './LeaderBoard';
 import ConfettiCanvas from "./ConfettiCanvas";
-import { HashRouter as Router, Route, Link, Switch } from "react-router-dom";
+import {HashRouter as Router, Route, Link, Switch} from 'react-router-dom';
 
 const AppRouter = () => (
   <Router>
