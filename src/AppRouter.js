@@ -15,10 +15,10 @@ const AppRouter = () => (
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">The Game</Link>
             </li>
             <li>
-              <Link to="/visualize/">Visualize</Link>
+              <Link to="/visualize/">Current State</Link>
             </li>
             <li>
               <Link to="/leader-board/">Leader Board</Link>
