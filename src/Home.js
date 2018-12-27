@@ -19,7 +19,7 @@ class Home extends Component {
           searching QR codes about MARK at the CCC. You will recognize them as
           soon as you find them.
           <br />
-          We will send out hints on Twitter every once in a while (stay in sync with <a href="https://twitter.com/distortionproto">@distortionproto</a> and #huntzuckerberg).</br>
+          We will send out hints on Twitter every once in a while from Twitter <a href="https://twitter.com/dist0rtionproto">@distortionproto</a> and #huntzuckerberg).</br>
           Each token can be redeemed with and Ethereum transaction (so you will
           need wallet enabled browser and some Ether on Rinkeby).
           <br />
