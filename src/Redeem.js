@@ -12,6 +12,7 @@ class Redeem extends Component {
   }
 
   async handleRedeem() {
+    this.setState({ loading: true });
     const web3 = await getWeb3();
     const account = (await web3.eth.getAccounts())[0];
     const contract = await getContract(web3, "HuntZuckerberg");
@@ -19,7 +20,7 @@ class Redeem extends Component {
       await contract.methods
         .redeem(this.props.match.params.token)
         .send({ from: account });
-      this.setState({ wasRedeemed: true });
+      this.setState({ wasRedeemed: true, loading: false});
     } catch (err) {
       alert(err);
     }
@@ -68,7 +69,7 @@ class Redeem extends Component {
             disabled={isTokenRedeemed}
             onClick={this.handleRedeem.bind(this)}
           >
-            Redeem
+          { this.state.loading ? "Loading..." : "Redeem"}
           </button>
         </div>
         {this.state.wasRedeemed && (
