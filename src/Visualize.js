@@ -9,8 +9,6 @@ class Visualize extends Component {
   }
 
   async updateCodes(account, contract) {
-    console.log(account);
-    console.log(contract);
     const activatedCodes = (
       (await contract.methods.getActivatedHashedCodes().call()) || []
     ).map(code => toHexAndPad(code));
@@ -26,20 +24,14 @@ class Visualize extends Component {
       owners[code] = tokenToPlayer;
       this.setState({ owners: owners });
     });
+    setTimeout(async () => await this.updateCodes(account, contract), 2000);
   }
 
   async componentDidMount() {
     const web3 = await getWeb3Anon();
     const [account = "none"] = await web3.eth.getAccounts();
     const contract = await getContract(web3, "HuntZuckerberg");
-    this.updateCodes(account, contract);
-
-    const codeEvent = contract.events.CodeRedeemed();
-    codeEvent
-      .on("data", function(event) {
-        this.updateCodes(account, contract);
-      })
-      .on("error", console.error);
+    await this.updateCodes(account, contract);
   }
 
   render() {
