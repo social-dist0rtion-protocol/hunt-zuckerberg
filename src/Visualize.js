@@ -8,10 +8,7 @@ class Visualize extends Component {
     this.state = { activatedCodes: [], owners: {} };
   }
 
-  async componentDidMount() {
-    const web3 = await getWeb3Anon();
-    const [account = "none"] = await web3.eth.getAccounts();
-    const contract = await getContract(web3, "HuntZuckerberg");
+  async updateCodes(account, contract) {
     const activatedCodes = (
       (await contract.methods.getActivatedHashedCodes().call()) || []
     ).map(code => toHexAndPad(code));
@@ -27,6 +24,14 @@ class Visualize extends Component {
       owners[code] = tokenToPlayer;
       this.setState({ owners: owners });
     });
+    setTimeout(async () => await this.updateCodes(account, contract), 2000);
+  }
+
+  async componentDidMount() {
+    const web3 = await getWeb3Anon();
+    const [account = "none"] = await web3.eth.getAccounts();
+    const contract = await getContract(web3, "HuntZuckerberg");
+    await this.updateCodes(account, contract);
   }
 
   render() {
@@ -42,8 +47,7 @@ class Visualize extends Component {
             margin: "auto",
             width: "2480px",
             height: "1656px"
-          }}
-        >
+          }}>
           {activatedCodes.map(function(code) {
             const { image, left, top, width, height } = IMAGE_CONFIG[code];
 
@@ -57,8 +61,7 @@ class Visualize extends Component {
                   top: top,
                   width: width,
                   height: height
-                }}
-              >
+                }}>
                 <img
                   src={`./images/puzzle/${image}`}
                   width={width}
