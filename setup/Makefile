@@ -3,7 +3,6 @@
 SEED ?= test
 STAGE ?= github
 GITHUB_PAGES_ACCOUNT=social-dist0rtion-protocol
-IPFS_NODE_IP=34.245.87.179
 IPFS_DATA_DIR=$(HOME)/.ipfs_data
 SRC_DIR=$(shell cd .. && pwd)/src
 RESOURCES_DIR=$(SRC_DIR)/resources
