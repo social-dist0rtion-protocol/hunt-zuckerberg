@@ -69,7 +69,7 @@ class Redeem extends Component {
             disabled={isTokenRedeemed}
             onClick={this.handleRedeem.bind(this)}
           >
-          { this.state.loading ? "Loading..." : "Redeem"}
+          { this.state.loading ? "Loading... It can take up to 15 seconds" : "Redeem"}
           </button>
         </div>
         {this.state.wasRedeemed && (

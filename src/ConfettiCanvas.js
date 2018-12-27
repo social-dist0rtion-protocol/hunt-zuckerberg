@@ -18,6 +18,13 @@ const ConfettiCanvas = sizeMe({
         this.setState({ confetti: window.confetti });
       }, 100);
     }
+    componentDidUpdate() {
+      if (this.state.confetti === "100%") {
+        setTimeout(() => {
+          window.confetti = "0%";
+        }, 5000);
+      }
+    }
     render() {
       return (
         <div
