@@ -15,15 +15,16 @@ class Home extends Component {
           <br />
         </p>
         <p>
-          Each MARK piece is a token. You can find them by searching QR codes
-          about MARK at the CCC. You will recognize them as soon as you find
-          them.
+          Each piece of Mark (a ZUCKERBIT) is a token. You can find them by
+          searching QR codes about MARK at the CCC. You will recognize them as
+          soon as you find them.
           <br />
           Each token can be redeemed with and Ethereum transaction (so you will
-          need wallet enabled browser and some Ethereum on Rinkeby).
+          need wallet enabled browser and some Ether on Rinkeby).
           <br />
-          Once you find a piece, you can come to the Social Dist0rtion Protocol
-          assembly and redeem a prize. The winner will get a YUBI key!!!111 one
+          Once you find a ZUCKERBIT, you can come to the Social Dist0rtion
+          Protocol assembly and redeem a prize. The winner will get a YUBI
+          key!!!111 one
         </p>
         <h1>Requirements</h1>
         <ul>
@@ -32,14 +33,18 @@ class Home extends Component {
             on mobile
           </li>
           <li>
-            An Ethereum wallet with Eth (on Rinkeby, so no real money involved)
+            An Ethereum wallet with Ether on the Rinkeby test network, so no
+            real money involved. We can also send you some if you need.
           </li>
         </ul>
         <h1>Support</h1>
         <ul>
           <li>
-            Come to the Social Dist0rtion Protocol assembly if you want to talk
-            to <b>real people</b>
+            Come to the{" "}
+            <a href="https://35c3.c3nav.de/l/social-dist0rtion-protocol/">
+              Social Dist0rtion Protocol assembly
+            </a>{" "}
+            if you want to talk to <b>real people</b>.
           </li>
           <li>
             DECT numbers:
@@ -60,7 +65,8 @@ class Home extends Component {
             </ul>
           </li>
           <li>
-            For the winner (most pieces collected): a brand new <b>Yubi Key</b>
+            For the winner (most ZUCKERBITS collected): a brand new{" "}
+            <b>Yubi Key</b>
           </li>
         </ul>
       </div>
