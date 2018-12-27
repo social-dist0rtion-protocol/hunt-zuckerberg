@@ -45,11 +45,12 @@ class Redeem extends Component {
 
     return (
       <div className="Redeem">
-        <h1>You've found a piece of Mark Zuckerberg!</h1>
+        <h1>You've found a ZUCKERBIT!</h1>
 
         <p>
           Mark Zuckerberg has been decentralized and spread around the 35c3.
-          Redeem this token and help us rebuilding The Mark™.
+          Redeem this token and help us reassemble the ZUCKERBITS into a
+          ZUCKERBERG.
         </p>
         <div className="token">
           <h2>{token}</h2>
