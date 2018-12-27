@@ -8,10 +8,9 @@ class Visualize extends Component {
     this.state = { activatedCodes: [], owners: {} };
   }
 
-  async componentDidMount() {
-    const web3 = await getWeb3Anon();
-    const [account = "none"] = await web3.eth.getAccounts();
-    const contract = await getContract(web3, "HuntZuckerberg");
+  async updateCodes(account, contract) {
+    console.log(account);
+    console.log(contract);
     const activatedCodes = (
       (await contract.methods.getActivatedHashedCodes().call()) || []
     ).map(code => toHexAndPad(code));
@@ -29,6 +28,20 @@ class Visualize extends Component {
     });
   }
 
+  async componentDidMount() {
+    const web3 = await getWeb3Anon();
+    const [account = "none"] = await web3.eth.getAccounts();
+    const contract = await getContract(web3, "HuntZuckerberg");
+    this.updateCodes(account, contract);
+
+    const codeEvent = contract.events.CodeRedeemed();
+    codeEvent
+      .on("data", function(event) {
+        this.updateCodes(account, contract);
+      })
+      .on("error", console.error);
+  }
+
   render() {
     let { activatedCodes, account, owners } = this.state;
     if (!activatedCodes) {
@@ -42,8 +55,7 @@ class Visualize extends Component {
             margin: "auto",
             width: "2480px",
             height: "1656px"
-          }}
-        >
+          }}>
           {activatedCodes.map(function(code) {
             const { image, left, top, width, height } = IMAGE_CONFIG[code];
 
@@ -57,8 +69,7 @@ class Visualize extends Component {
                   top: top,
                   width: width,
                   height: height
-                }}
-              >
+                }}>
                 <img
                   src={`./images/puzzle/${image}`}
                   width={width}
