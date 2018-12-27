@@ -32,7 +32,7 @@ class Redeem extends Component {
     const tokenToPlayer = await contract.methods
       .hashedCodeToPlayer(Web3Utils.keccak256(this.props.match.params.token))
       .call();
-    if (tokenToPlayer === NEW_TOKEN) {
+    if (tokenToPlayer === NEW_TOKEN && this.state.owner !== "loading") {
       owner = null;
     } else if (tokenToPlayer === account) {
       owner = "me";
@@ -90,7 +90,7 @@ class Redeem extends Component {
         <div className="token">
           <h2>{token}</h2>
           <img src={`./images/puzzle/${image}`} alt="" />
-          {!owner && (
+          {isWallet() && !owner && (
             <button
               disabled={owner === "loading"}
               onClick={this.handleRedeem.bind(this)}
