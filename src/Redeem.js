@@ -17,23 +17,26 @@ class Redeem extends Component {
     const web3 = await getWeb3();
     const account = (await web3.eth.getAccounts())[0];
     const contract = await getContract(web3, "HuntZuckerberg");
-    try {
-      await contract.methods
-        .redeem(this.props.match.params.token)
-        .send({ from: account });
-      // this.setState({ wasRedeemed: true, loading: false });
-    } catch (err) {
-      alert(err);
-    }
+    //try {
+    // await
+    contract.methods
+      .redeem(this.props.match.params.token)
+      .send({ from: account });
+    //   this.setState({ wasRedeemed: true, loading: false });
+    // } catch (err) {
+    //   alert(err);
+    // }
   }
 
   async updateCode(web3, account, contract) {
-    let owner = null;
+    let owner = this.state.owner;
     const tokenToPlayer = await contract.methods
       .hashedCodeToPlayer(Web3Utils.keccak256(this.props.match.params.token))
       .call();
-    if (tokenToPlayer === NEW_TOKEN && this.state.owner !== "loading") {
-      owner = null;
+    if (tokenToPlayer === NEW_TOKEN) {
+      if (this.state.owner !== "loading") {
+        owner = null;
+      }
     } else if (tokenToPlayer === account) {
       owner = "me";
     } else {
@@ -91,21 +94,19 @@ class Redeem extends Component {
           <h2>{token}</h2>
           <img src={`./images/puzzle/${image}`} alt="" />
           {isWallet() && !owner && (
-            <button
-              disabled={owner === "loading"}
-              onClick={this.handleRedeem.bind(this)}
-            >
-              {this.state.owner === "loading"
-                ? "Loading... It can take up to 15 seconds"
-                : "Redeem"}
-            </button>
+            <button onClick={this.handleRedeem.bind(this)}>"Redeem"</button>
+          )}
+          {this.state.owner === "loading" && (
+            <div>
+              <p>Loading... It can take up to 15 seconds</p>
+            </div>
+          )}
+          {this.state.owner === "me" && (
+            <div className="success">
+              <p>You've successfully have redeemed a piece of Mark! Congraz!</p>
+            </div>
           )}
         </div>
-        {this.state.owner === "me" && (
-          <div className="success">
-            <p>You've successfully have redeemed a piece of Mark! Congraz!</p>
-          </div>
-        )}
 
         {!isWallet() && (
           <div className="alert warning">
