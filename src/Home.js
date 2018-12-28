@@ -50,21 +50,37 @@ class Home extends Component {
             </a>{" "}
             if you want to talk to <b>real people</b>.
           </li>
+          <li>DECT number: 8960</li>
           <li>
-            DECT numbers:
+            If you need Ether for the Rinkey network you can either:
             <ul>
-              <li>vrde: 6665</li>
-              <li>sirnicolaz: 6616</li>
+              <li>
+                Go to{" "}
+                <a href="https://faucet.rinkeby.io/">
+                  https://faucet.rinkeby.io/
+                </a>
+              </li>
+              <li>
+                Ask us on{" "}
+                <a
+                  href="
+https://twitter.com/dist0rtionproto"
+                >
+                  twitter
+                </a>{" "}
+                or come to our assembly.
+              </li>
             </ul>
           </li>
         </ul>
         <h1>Bounties</h1>
         <ul>
           <li>
-            For each unlocked ZUCKERBIT::
+            For each unlocked ZUCKERBIT:
             <ul>
               <li>Grappa</li>
               <li>Berliner Luft</li>
+              <li>Pfefferminz</li>
               <li>Maybe other stuff? :j</li>
             </ul>
           </li>
