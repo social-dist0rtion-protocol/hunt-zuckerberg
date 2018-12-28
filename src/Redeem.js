@@ -97,9 +97,11 @@ class Redeem extends Component {
         <div className="token">
           <h2>{token}</h2>
           <img src={`./images/puzzle/${image}`} alt="" />
-          {isWallet() && !owner && (
-            <button onClick={this.handleRedeem.bind(this)}>"Redeem"</button>
-          )}
+          {isWallet() &&
+            !owner &&
+            !loading(
+              <button onClick={this.handleRedeem.bind(this)}>Redeem</button>
+            )}
           {loading && (
             <div>
               <p>Loading... It can take up to 15 seconds</p>
