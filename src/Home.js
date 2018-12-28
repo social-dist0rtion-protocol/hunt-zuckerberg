@@ -90,10 +90,19 @@ https://twitter.com/dist0rtionproto"
           </li>
         </ul>
         <h1>Technical stuff</h1>
-        We are running the web application as a rich js client getting the state
-        from the Ethereum. The whole progress of the hunt is transparently
-        tracked and updated with Ethereum smart contracts. Because you deserve
-        trust.
+        <p>
+          We are running the web application as a rich js client getting the
+          state from the Ethereum. The whole progress of the hunt is
+          transparently tracked and updated with Ethereum smart contracts.
+          Because you deserve trust.
+        </p>
+        <p>
+          Check out the code on{" "}
+          <a href="https://github.com/social-dist0rtion-protocol/hunt-zuckerberg">
+            GitHub
+          </a>
+          .
+        </p>
       </div>
     );
   }
