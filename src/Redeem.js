@@ -130,7 +130,7 @@ class Redeem extends Component {
         <h2>What is this?</h2>
         <p>This game works on the Ethereum Rinkeby blockchain.</p>
         <p>
-          Read how it works in the <Link to="/about">about page</Link>, and make
+          Read how it works in the <Link to="/">about page</Link>, and make
           sure to visit us at the
           <a href="https://35c3.c3nav.de/l/social-dist0rtion-protocol/">
             assembly table.
