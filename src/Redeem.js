@@ -9,11 +9,11 @@ const NEW_TOKEN = "0x0000000000000000000000000000000000000001";
 class Redeem extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { loading: false };
   }
 
   async handleRedeem() {
-    this.setState({ owner: "loading" });
+    this.setState({ loading: true });
     const web3 = await getWeb3();
     const account = (await web3.eth.getAccounts())[0];
     const contract = await getContract(web3, "HuntZuckerberg");
@@ -34,9 +34,7 @@ class Redeem extends Component {
       .hashedCodeToPlayer(Web3Utils.keccak256(this.props.match.params.token))
       .call();
     if (tokenToPlayer === NEW_TOKEN) {
-      if (this.state.owner !== "loading") {
-        owner = null;
-      }
+      owner = null;
     } else if (tokenToPlayer === account) {
       owner = "me";
     } else {
@@ -45,6 +43,12 @@ class Redeem extends Component {
     this.setState({
       owner: owner
     });
+
+    if (owner === "me" || owner === "other") {
+      this.setState({
+        loading: false
+      });
+    }
 
     setTimeout(
       async () => await this.updateCode(web3, account, contract),
@@ -71,7 +75,7 @@ class Redeem extends Component {
     if (!IMAGE_CONFIG[hexToken]) {
       return <h1>Invalid Token</h1>;
     }
-    const { owner } = this.state;
+    const { owner, loading } = this.state;
     const { image } = IMAGE_CONFIG[hexToken];
     let title;
     if (owner === "me") {
@@ -96,7 +100,7 @@ class Redeem extends Component {
           {isWallet() && !owner && (
             <button onClick={this.handleRedeem.bind(this)}>"Redeem"</button>
           )}
-          {this.state.owner === "loading" && (
+          {loading && (
             <div>
               <p>Loading... It can take up to 15 seconds</p>
             </div>
@@ -116,8 +120,7 @@ class Redeem extends Component {
               <a
                 href="https://metamask.io/"
                 target="_blank"
-                rel="noopener noreferrer"
-              >
+                rel="noopener noreferrer">
                 MetaMask
               </a>{" "}
               on your browser.
