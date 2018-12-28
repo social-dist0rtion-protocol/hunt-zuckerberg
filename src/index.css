@@ -60,6 +60,7 @@ nav ul li {
   border-width: 1px;
   border-style: solid;
   padding: 10px 20px;
+  text-align: center;
 }
 
 .alert.warning {

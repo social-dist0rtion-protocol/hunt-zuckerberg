@@ -5,12 +5,14 @@ import NotFound from "./NotFound";
 import Visualize from "./Visualize";
 import LeaderBoard from "./LeaderBoard";
 import ConfettiCanvas from "./ConfettiCanvas";
+import CheckConnection from "./CheckConnection";
 import { HashRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 const AppRouter = () => (
   <Router>
     <div>
       <ConfettiCanvas />
+      <CheckConnection />
       <header>
         <h1>Hunt Zuckerberg</h1>
         <h2>35c3 treasure hunt game!</h2>
